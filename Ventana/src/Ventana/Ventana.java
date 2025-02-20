@@ -12,8 +12,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JComboBox;
 
 public class Ventana extends JFrame{
@@ -115,7 +118,7 @@ public class Ventana extends JFrame{
         this.add(accederButton);
         
         
-        /*JPanel panelRegistro = new JPanel();
+        JPanel panelRegistro = new JPanel();
         panelRegistro.setBounds(500, 0, 500, 500);
         panelRegistro.setBackground(Color.decode("#00BFFF"));
         panelRegistro.setLayout(null);
@@ -203,10 +206,10 @@ public class Ventana extends JFrame{
         crearCuentaButton.setFont(texto2);
         crearCuentaButton.setBackground(Color.WHITE);
         crearCuentaButton.setForeground(Color.BLACK);
-        panelRegistro.add(crearCuentaButton);*/
+        panelRegistro.add(crearCuentaButton);
         
         // PANEL DE CALCULADORA
-        JPanel panelCalculadora = new JPanel();
+       /* JPanel panelCalculadora = new JPanel();
         panelCalculadora.setBounds(550, 50, 400, 500);
         panelCalculadora.setBackground(Color.decode("#333333"));
         panelCalculadora.setLayout(null);
@@ -233,14 +236,12 @@ public class Ventana extends JFrame{
             boton.setFont(new Font("Arial", Font.BOLD, 20));
             boton.setForeground(Color.WHITE);
             boton.setBackground(textoBoton.matches("[0-9]") ? Color.DARK_GRAY : Color.GRAY);
-            panelBotones.add(boton);
-        }
+            panelBotones.add(boton);*/
         
-        this.repaint();
-        this.validate();
-        this.setVisible(true);
+     // Tabla para mostrar datos
         
         
+      
 	}
 	
 }
