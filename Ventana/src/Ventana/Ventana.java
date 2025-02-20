@@ -1,6 +1,7 @@
 package Ventana;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.color.*;
 
 import javax.swing.ButtonGroup;
@@ -114,7 +115,7 @@ public class Ventana extends JFrame{
         this.add(accederButton);
         
         
-        JPanel panelRegistro = new JPanel();
+        /*JPanel panelRegistro = new JPanel();
         panelRegistro.setBounds(500, 0, 500, 500);
         panelRegistro.setBackground(Color.decode("#00BFFF"));
         panelRegistro.setLayout(null);
@@ -202,11 +203,44 @@ public class Ventana extends JFrame{
         crearCuentaButton.setFont(texto2);
         crearCuentaButton.setBackground(Color.WHITE);
         crearCuentaButton.setForeground(Color.BLACK);
-        panelRegistro.add(crearCuentaButton);
+        panelRegistro.add(crearCuentaButton);*/
+        
+        // PANEL DE CALCULADORA
+        JPanel panelCalculadora = new JPanel();
+        panelCalculadora.setBounds(550, 50, 400, 500);
+        panelCalculadora.setBackground(Color.decode("#333333"));
+        panelCalculadora.setLayout(null);
+        this.add(panelCalculadora);
+        
+        JLabel display = new JLabel("0", SwingConstants.RIGHT);
+        display.setBounds(10, 10, 380, 50);
+        display.setFont(new Font("Arial", Font.BOLD, 30));
+        display.setForeground(Color.WHITE);
+        display.setBackground(Color.BLACK);
+        display.setOpaque(true);
+        panelCalculadora.add(display);
+        
+        JPanel panelBotones = new JPanel();
+        panelBotones.setBounds(10, 70, 380, 400);
+        panelBotones.setLayout(new GridLayout(5, 4, 5, 5));
+        panelBotones.setBackground(Color.decode("#333333"));
+        panelCalculadora.add(panelBotones);
+        
+        String[] botones = {"CE", "", "%", "/", "7", "8", "9", "+", "4", "5", "6", "-", "1", "2", "3", "*", "0", ".", "=", "+"};
+        //for para los botones y lo escrito en ellos
+        for (String textoBoton : botones) {
+            JButton boton = new JButton(textoBoton);
+            boton.setFont(new Font("Arial", Font.BOLD, 20));
+            boton.setForeground(Color.WHITE);
+            boton.setBackground(textoBoton.matches("[0-9]") ? Color.DARK_GRAY : Color.GRAY);
+            panelBotones.add(boton);
+        }
         
         this.repaint();
         this.validate();
         this.setVisible(true);
+        
+        
 	}
 	
 }
