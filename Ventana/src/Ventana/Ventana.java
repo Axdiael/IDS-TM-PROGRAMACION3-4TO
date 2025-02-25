@@ -10,6 +10,9 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
@@ -63,14 +66,15 @@ public class Ventana extends JFrame{
 		etiqueta1.setSize(200, 50);
 		etiqueta1.setLocation(155, 50);
 		//etiqueta1.setBackground(Color.gray);
-		etiqueta1.setOpaque(true);
+		etiqueta1.setOpaque(false);
 		etiqueta1.setHorizontalAlignment(JLabel.CENTER);
 		etiqueta1.setFont(texto);
 		this.add(etiqueta1);
 		
 		// Icono Usuario
 		ImageIcon iconoUsuario = new ImageIcon("user.png");
-		JLabel usuarioIcon = new JLabel(iconoUsuario);
+		//JLabel usuarioIcon = new JLabel(iconoUsuario);
+		JLabel usuarioIcon = new JLabel(new ImageIcon(iconoUsuario.getImage().getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH)));
 		usuarioIcon.setBounds(50, 140, 30, 30);
 		panel.add(usuarioIcon);
 
@@ -96,7 +100,8 @@ public class Ventana extends JFrame{
         
         // Icono contraseña
         ImageIcon iconoPassword1 = new ImageIcon("password.png");
-        JLabel passwordIcon = new JLabel(iconoPassword1);
+        //JLabel passwordIcon = new JLabel(iconoPassword1);
+        JLabel passwordIcon = new JLabel(new ImageIcon(iconoPassword1.getImage().getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH)));
         passwordIcon.setBounds(50, 230, 30, 30);
         panel.add(passwordIcon);
         
@@ -125,6 +130,7 @@ public class Ventana extends JFrame{
         recordarCheck.setBounds(50, 280, 150, 30);
         recordarCheck.setForeground(Color.WHITE);
         recordarCheck.setBackground(Color.decode("#5A5A5A"));
+        
         recordarCheck.setFont(texto3);
         this.add(recordarCheck);
         
@@ -135,7 +141,48 @@ public class Ventana extends JFrame{
         olvidasteLabel.setFont(texto3);
         olvidasteLabel.setForeground(Color.WHITE);
         this.add(olvidasteLabel);
-
+        
+        
+      //Barra de menus
+        JMenuBar barra = new JMenuBar();
+        
+        JMenu menu1= new JMenu("Archivo");
+        JMenu menu2= new JMenu("Ayuda");
+        
+        barra.add(menu1);
+        barra.add(menu2);
+        
+        //Menu 1
+        JMenuItem abrir = new JMenuItem("Abrir");
+        JMenuItem nuevo = new JMenuItem("Nuevo");
+        JMenuItem guardar = new JMenuItem("Guardar");
+        JMenuItem mas = new JMenuItem("cerrar ");
+        
+        //Menu 2
+        JMenuItem opciones = new JMenuItem("Opciones");
+        JMenuItem acercaD = new JMenuItem("Acerca de:");
+        JMenuItem Manual = new JMenuItem("Manual de usuario");
+        JMenuItem cerrar = new JMenuItem("cerrar ");
+        
+        
+        menu1.add(abrir);
+        menu1.add(nuevo);
+        menu1.add(guardar);
+        menu1.add(mas);
+        menu1.add(cerrar);
+        
+        menu2.add(opciones);
+        menu2.add(acercaD);
+        menu2.add(Manual);
+        menu2.add(cerrar);
+        
+        this.setJMenuBar(barra);
+        
+        this.repaint();
+        this.revalidate();
+        
+        
+       
         //Acceder
         
         JButton accederButton = new JButton("Acceder");
