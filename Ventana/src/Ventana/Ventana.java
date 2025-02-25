@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.color.*;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -40,37 +41,64 @@ public class Ventana extends JFrame{
 		//Sobre que elemento colocare el item
 		this.setLocationRelativeTo(null);
 		
-		this.getContentPane().setBackground(Color.decode("#5A5A5A"));
+
 		
+        ImageIcon fondoImagen = new ImageIcon("fondo.jpg");
+        JLabel fondo = new JLabel(fondoImagen);
+        fondo.setBounds(0, 0, 1000, 700);
+        this.setContentPane(fondo);
+        
+        
+        //panel principal
+        JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.setOpaque(false);
+		panel.setBounds(0, 0, 1000, 700);
+		this.add(panel);
+      
 		//TITULO ACCEDER 
 		
 		JLabel etiqueta1 = new JLabel ("inicio de sesión");
 		
 		etiqueta1.setSize(200, 50);
 		etiqueta1.setLocation(155, 50);
-		etiqueta1.setBackground(Color.gray);
+		//etiqueta1.setBackground(Color.gray);
 		etiqueta1.setOpaque(true);
 		etiqueta1.setHorizontalAlignment(JLabel.CENTER);
 		etiqueta1.setFont(texto);
 		this.add(etiqueta1);
 		
+		// Icono Usuario
+		ImageIcon iconoUsuario = new ImageIcon("user.png");
+		JLabel usuarioIcon = new JLabel(iconoUsuario);
+		usuarioIcon.setBounds(50, 140, 30, 30);
+		panel.add(usuarioIcon);
+
+		
 		// Etiqueta para Usuario
-        JLabel usuarioLabel = new JLabel("USUARIO:");
+		
+		JLabel usuarioLabel = new JLabel("USUARIO:");
         usuarioLabel.setBounds(50, 100, 150, 30);
         usuarioLabel.setFont(texto2);
         usuarioLabel.setForeground(Color.WHITE);
-        this.add(usuarioLabel);
+        panel.add(usuarioLabel);
         
         //Campo de texto
         
         JTextField usuarioField = new JTextField();
-        usuarioField.setBounds(50, 140, 150, 30);
+        usuarioField.setBounds(100, 140, 150, 30);
         usuarioField.setFont(texto2);
         usuarioField.setBackground(Color.WHITE);
         //usuarioField.setVisible(true);
         //usuarioField.setOpaque(true);
         //usuarioField.setHorizontalAlignment(JLabel.CENTER);
-        this.add(usuarioField);
+        panel.add(usuarioField);
+        
+        // Icono contraseña
+        ImageIcon iconoPassword1 = new ImageIcon("password.png");
+        JLabel passwordIcon = new JLabel(iconoPassword1);
+        passwordIcon.setBounds(50, 230, 30, 30);
+        panel.add(passwordIcon);
         
         //CONTRASEÑA
         
@@ -80,16 +108,16 @@ public class Ventana extends JFrame{
         contraseñaLabel.setFont(texto2);
         //contraseñaLabel.setVisible(true);
        // contraseñaLabel.setOpaque(true);
-        this.add(contraseñaLabel);
+        panel.add(contraseñaLabel);
         
         JPasswordField contraseñaField = new JPasswordField(); 
-        contraseñaField.setBounds(50, 230, 150, 30);
+        contraseñaField.setBounds(100, 230, 150, 30);
         contraseñaField.setForeground(Color.BLACK);
         /*contraseñaField.setVisible(true);
         contraseñaField.setOpaque(true);
         contraseñaField.setHorizontalAlignment(JLabel.CENTER);*/
         contraseñaField.setFont(texto2);
-        this.add(contraseñaField);
+        panel.add(contraseñaField);
         
         //Recordarme
         
@@ -209,7 +237,7 @@ public class Ventana extends JFrame{
         panelRegistro.add(crearCuentaButton);
         
         // PANEL DE CALCULADORA
-       /* JPanel panelCalculadora = new JPanel();
+        /*JPanel panelCalculadora = new JPanel();
         panelCalculadora.setBounds(550, 50, 400, 500);
         panelCalculadora.setBackground(Color.decode("#333333"));
         panelCalculadora.setLayout(null);
@@ -236,12 +264,10 @@ public class Ventana extends JFrame{
             boton.setFont(new Font("Arial", Font.BOLD, 20));
             boton.setForeground(Color.WHITE);
             boton.setBackground(textoBoton.matches("[0-9]") ? Color.DARK_GRAY : Color.GRAY);
-            panelBotones.add(boton);*/
+            panelBotones.add(boton);
+    
+        }*/
         
-     // Tabla para mostrar datos
-        
-        
-      
+        this.setVisible(true);
 	}
-	
 }
