@@ -1,4 +1,6 @@
 package Ventana;
+import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -193,13 +195,13 @@ public class Ventana extends JFrame{
         this.add(accederButton);
         
         
-        JPanel panelRegistro = new JPanel();
+        /*JPanel panelRegistro = new JPanel();
         panelRegistro.setBounds(500, 0, 500, 500);
         panelRegistro.setBackground(Color.decode("#00BFFF"));
         panelRegistro.setLayout(null);
-        this.add(panelRegistro);
+        this.add(panelRegistro);/*
 
-        JLabel tituloRegistro = new JLabel("REGISTRO", SwingConstants.CENTER);
+        /*JLabel tituloRegistro = new JLabel("REGISTRO", SwingConstants.CENTER);
         tituloRegistro.setBounds(0, 20, 500, 40);
         tituloRegistro.setFont(texto);
         tituloRegistro.setForeground(Color.BLACK);
@@ -281,10 +283,10 @@ public class Ventana extends JFrame{
         crearCuentaButton.setFont(texto2);
         crearCuentaButton.setBackground(Color.WHITE);
         crearCuentaButton.setForeground(Color.BLACK);
-        panelRegistro.add(crearCuentaButton);
+        panelRegistro.add(crearCuentaButton);*/
         
         // PANEL DE CALCULADORA
-        /*JPanel panelCalculadora = new JPanel();
+        JPanel panelCalculadora = new JPanel();
         panelCalculadora.setBounds(550, 50, 400, 500);
         panelCalculadora.setBackground(Color.decode("#333333"));
         panelCalculadora.setLayout(null);
@@ -298,15 +300,29 @@ public class Ventana extends JFrame{
         display.setOpaque(true);
         panelCalculadora.add(display);
         
-        JPanel panelBotones = new JPanel();
+        JPanel panelBotones = new JPanel( new GridLayout(5, 4) );
         panelBotones.setBounds(10, 70, 380, 400);
         panelBotones.setLayout(new GridLayout(5, 4, 5, 5));
         panelBotones.setBackground(Color.decode("#333333"));
         panelCalculadora.add(panelBotones);
         
-        String[] botones = {"CE", "", "%", "/", "7", "8", "9", "+", "4", "5", "6", "-", "1", "2", "3", "*", "0", ".", "=", "+"};
+        String[] botones = {
+                "(", ")", "%", "AC",
+                "7", "8", "9", "/",
+                "4", "5", "6", "x",
+                "1", "2", "3", "-",
+                "0", ".", "=", "+"
+            };
+        //For para agregar los botones
+        for (int i = 0; i <= 19; i++) {
+            panelBotones.add(new JButton(botones[i]));
+        }
+        
+        panelCalculadora.add(panelBotones, BorderLayout.CENTER);
+        
+        //String[] botones = {"CE", "", "%", "/", "7", "8", "9", "+", "4", "5", "6", "-", "1", "2", "3", "*", "0", ".", "=", "+"};
         //for para los botones y lo escrito en ellos
-        for (String textoBoton : botones) {
+        /*for (String textoBoton : botones) {
             JButton boton = new JButton(textoBoton);
             boton.setFont(new Font("Arial", Font.BOLD, 20));
             boton.setForeground(Color.WHITE);
@@ -314,6 +330,10 @@ public class Ventana extends JFrame{
             panelBotones.add(boton);
     
         }*/
+      
+        
+       // JLabel etiqueta4 = new JLabel();
+        
         
         this.setVisible(true);
 	}
