@@ -2,9 +2,11 @@ package Ventana;
 import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.color.*;
+import java.util.Set;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -36,11 +38,11 @@ public class Ventana extends JFrame{
 		this.setTitle(title);
 		//hace visible la ventana
 		//this.setVisible(true);
-		this.setSize(1000, 700);
+		this.setSize(1000, 800);
 		//Sirve para ajustar el tamaño de la ventana
 		this.setResizable(true);
 		//Elimina el formato predeterminado de la ventana (ayuda a que funcionen las otras modificaciones)
-		this.setLayout(null);
+		this.setLayout(new BorderLayout(10, 10));
 		//que pasa cuando cierro mi aplicación
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//Sobre que elemento colocare el item
@@ -48,7 +50,7 @@ public class Ventana extends JFrame{
 		
 
 		
-        ImageIcon fondoImagen = new ImageIcon("fondo.jpg");
+        /*ImageIcon fondoImagen = new ImageIcon("fondo.jpg");
         JLabel fondo = new JLabel(fondoImagen);
         fondo.setBounds(0, 0, 1000, 700);
         this.setContentPane(fondo);
@@ -122,7 +124,7 @@ public class Ventana extends JFrame{
         contraseñaField.setForeground(Color.BLACK);
         /*contraseñaField.setVisible(true);
         contraseñaField.setOpaque(true);
-        contraseñaField.setHorizontalAlignment(JLabel.CENTER);*/
+        contraseñaField.setHorizontalAlignment(JLabel.CENTER);
         contraseñaField.setFont(texto2);
         panel.add(contraseñaField);
         
@@ -286,7 +288,7 @@ public class Ventana extends JFrame{
         panelRegistro.add(crearCuentaButton);*/
         
         // PANEL DE CALCULADORA
-        JPanel panelCalculadora = new JPanel();
+       /* JPanel panelCalculadora = new JPanel();
         panelCalculadora.setBounds(550, 50, 400, 500);
         panelCalculadora.setBackground(Color.decode("#333333"));
         panelCalculadora.setLayout(null);
@@ -318,7 +320,7 @@ public class Ventana extends JFrame{
             panelBotones.add(new JButton(botones[i]));
         }
         
-        panelCalculadora.add(panelBotones, BorderLayout.CENTER);
+        panelCalculadora.add(panelBotones, BorderLayout.CENTER);*/
         
         //String[] botones = {"CE", "", "%", "/", "7", "8", "9", "+", "4", "5", "6", "-", "1", "2", "3", "*", "0", ".", "=", "+"};
         //for para los botones y lo escrito en ellos
@@ -330,10 +332,81 @@ public class Ventana extends JFrame{
             panelBotones.add(boton);
     
         }*/
-      
         
-       // JLabel etiqueta4 = new JLabel();
+        setTitle("Calculadora de Interés");
+        setSize(500, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout(10, 10));
         
+        JLabel etiqueta5 = new JLabel ("Interes");
+		
+		etiqueta5.setSize(200, 50);
+		//etiqueta1.setBackground(Color.gray);
+		etiqueta5.setOpaque(false);
+		etiqueta5.setHorizontalAlignment(JLabel.CENTER);
+		etiqueta5.setFont(texto);
+		etiqueta5.setForeground(Color.RED);
+        add(etiqueta5, BorderLayout.NORTH);
+		
+        JPanel panelSuperior = new JPanel(new GridLayout(4, 2, 20, 20));
+        panelSuperior.setBackground(Color.GRAY);
+
+        JLabel capital= new JLabel("Capital:");
+        capital.setHorizontalAlignment(SwingConstants.RIGHT);
+        JTextField capitalInput= new JTextField("1500");
+
+        JLabel tiempo = new JLabel("Tiempo:");
+        tiempo.setHorizontalAlignment(SwingConstants.RIGHT);
+        JTextField tiempoInput = new JTextField("2");
+
+        JLabel tasa= new JLabel("Tasa interés:");
+        tasa.setHorizontalAlignment(SwingConstants.RIGHT);
+        JTextField tasaInput = new JTextField("0.1");
+        
+        panelSuperior.add(capital);
+        panelSuperior.add(capitalInput);
+        panelSuperior.add(tiempo);
+        panelSuperior.add(tiempoInput);
+        panelSuperior.add(tasa);
+        panelSuperior.add(tasaInput);
+
+        JPanel botonesPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 5));
+        JButton calcularButton = new JButton("Calcular");
+        calcularButton.setFont(texto3);
+        JButton cancelarButton = new JButton("Cancelar");
+        cancelarButton.setFont(texto3);
+        botonesPanel.add(calcularButton);
+        botonesPanel.add(cancelarButton);
+        panelSuperior.add(new JLabel()); 
+        panelSuperior.add(botonesPanel);
+
+        add(panelSuperior, BorderLayout.CENTER);
+        
+        panelSuperior.setVisible(true);
+
+        // Panel inferior 
+        JPanel panelInferior = new JPanel(new GridLayout(2, 2, 10, 10));
+        panelInferior.setBackground(Color.PINK);
+
+        JLabel interes = new JLabel("Interés:");
+        interes.setHorizontalAlignment(SwingConstants.RIGHT);
+        JTextField interesInput= new JTextField("315.0000000000002");
+
+        JLabel amount = new JLabel("Monto:");
+        amount.setHorizontalAlignment(SwingConstants.RIGHT);
+        JTextField amountInput= new JTextField("1815.0000000000002");
+        
+        panelInferior.add(interes);
+        panelInferior.add(interesInput);
+        
+        panelInferior.add(amount);
+        panelInferior.add(amountInput);
+        
+        add(panelInferior, BorderLayout.SOUTH);
+        panelInferior.setVisible(true);
+        
+        //this.revalidate();
+        //this.repaint();
         
         this.setVisible(true);
 	}
