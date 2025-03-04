@@ -48,9 +48,10 @@ public class Ventana extends JFrame{
 		//Sobre que elemento colocare el item
 		this.setLocationRelativeTo(null);
 		
-
+		ImageIcon icono = new ImageIcon("logo.png"); 
+		this.setIconImage(icono.getImage());
 		
-        /*ImageIcon fondoImagen = new ImageIcon("fondo.jpg");
+        ImageIcon fondoImagen = new ImageIcon("fondo.jpg");
         JLabel fondo = new JLabel(fondoImagen);
         fondo.setBounds(0, 0, 1000, 700);
         this.setContentPane(fondo);
@@ -116,14 +117,14 @@ public class Ventana extends JFrame{
         contraseñaLabel.setForeground(Color.WHITE);
         contraseñaLabel.setFont(texto2);
         //contraseñaLabel.setVisible(true);
-       // contraseñaLabel.setOpaque(true);
+        //contraseñaLabel.setOpaque(true);
         panel.add(contraseñaLabel);
         
         JPasswordField contraseñaField = new JPasswordField(); 
         contraseñaField.setBounds(100, 230, 150, 30);
         contraseñaField.setForeground(Color.BLACK);
-        /*contraseñaField.setVisible(true);
-        contraseñaField.setOpaque(true);
+        //contraseñaField.setVisible(true);
+        //contraseñaField.setOpaque(true);
         contraseñaField.setHorizontalAlignment(JLabel.CENTER);
         contraseñaField.setFont(texto2);
         panel.add(contraseñaField);
@@ -331,7 +332,7 @@ public class Ventana extends JFrame{
             boton.setBackground(textoBoton.matches("[0-9]") ? Color.DARK_GRAY : Color.GRAY);
             panelBotones.add(boton);
     
-        }*/
+        }
         
         setTitle("Calculadora de Interés");
         setSize(500, 300);
@@ -403,7 +404,7 @@ public class Ventana extends JFrame{
         panelInferior.add(amountInput);
         
         add(panelInferior, BorderLayout.SOUTH);
-        panelInferior.setVisible(true);
+        panelInferior.setVisible(true);*/
         
         //this.revalidate();
         //this.repaint();
