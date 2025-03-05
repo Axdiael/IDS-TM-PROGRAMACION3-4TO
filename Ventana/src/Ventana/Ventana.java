@@ -1,13 +1,20 @@
 package Ventana;
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.color.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Set;
 
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -48,10 +55,12 @@ public class Ventana extends JFrame{
 		//Sobre que elemento colocare el item
 		this.setLocationRelativeTo(null);
 		
+		this.setBackground(Color.white);
+		
 		ImageIcon icono = new ImageIcon("logo.png"); 
 		this.setIconImage(icono.getImage());
 		
-        ImageIcon fondoImagen = new ImageIcon("fondo.jpg");
+        /*ImageIcon fondoImagen = new ImageIcon("fondo.jpg");
         JLabel fondo = new JLabel(fondoImagen);
         fondo.setBounds(0, 0, 1000, 700);
         this.setContentPane(fondo);
@@ -198,7 +207,7 @@ public class Ventana extends JFrame{
         this.add(accederButton);
         
         
-        /*JPanel panelRegistro = new JPanel();
+        JPanel panelRegistro = new JPanel();
         panelRegistro.setBounds(500, 0, 500, 500);
         panelRegistro.setBackground(Color.decode("#00BFFF"));
         panelRegistro.setLayout(null);
@@ -409,6 +418,58 @@ public class Ventana extends JFrame{
         //this.revalidate();
         //this.repaint();
         
+        
         this.setVisible(true);
+        
+        
 	}
+	
+	@Override
+	public void paint (Graphics g) {
+    	super.paint(g);
+    	
+    	Graphics2D g2=(Graphics2D) g;
+    	
+    	g2.drawRect(80, 80, 400, 400);
+    	g2.fillRect(200, 200, 200, 200);
+    	g2.clearRect(220, 220, 50, 50);
+    	
+    	g2.setColor(Color.red);
+    	g2.fillRoundRect (400, 80, 200, 200, 30, 30);
+    	
+    	g2.setColor(Color.green);
+    	g2.setStroke(new BasicStroke(10));
+    	g2.drawLine(100,100,900,500);
+    	
+    	g2.setColor(new Color(229, 114, 126));
+    	g2.drawOval(400, 400, 90, 90);
+    	g2.fillOval(400, 450, 75, 150);
+    	
+    	g2.setColor(new Color(207,147,240));
+    	
+    	g2.drawArc(600, 200, 200, 200, 1, -180);
+    	g2.fillArc(600, 200, 200, 200, 1, 180);
+    	
+    	g2.setColor(new Color(51,167,241));
+    	
+    	g2.setFont(texto);
+    	
+    	g2.drawString("Hola Cola", 350, 200);
+    	
+    	BufferedImage image;
+    	try {
+    		image = ImageIO.read(new File("capibara.png"));
+    		
+    		g2.drawImage(image, 800, 250,100, 100, Color.gray, null);
+    	
+    	}catch(IOException e) {
+    		e.printStackTrace();
+    	}
+    	
+    	int[] xs = {100,100,400};
+    	int []ys= {100,200,400};
+    	
+    	g2.drawPolygon(xs,ys,3);
+    }
+    
 }

@@ -119,11 +119,11 @@ public class WindowB {
 		panel_6.add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("Sexo:");
-		lblNewLabel_6.setBounds(33, 122, 45, 15);
+		lblNewLabel_6.setBounds(33, 121, 45, 15);
 		panel_6.add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_7 = new JLabel("Nacionalidad:");
-		lblNewLabel_7.setBounds(33, 145, 62, 15);
+		lblNewLabel_7.setBounds(33, 149, 62, 15);
 		panel_6.add(lblNewLabel_7);
 		
 		textField = new JTextField();
@@ -154,7 +154,7 @@ public class WindowB {
 		JComboBox comboBox = new JComboBox();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Perú", "México", "Argentina"}));
-		comboBox.setBounds(105, 145, 87, 13);
+		comboBox.setBounds(105, 145, 87, 22);
 		panel_6.add(comboBox);
 		
 		textField_1 = new JTextField();
@@ -272,10 +272,5 @@ public class WindowB {
 		panel_5.add(btnSalir);
 	}
 
-
-
-	private void setIconImage(Image image) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }
