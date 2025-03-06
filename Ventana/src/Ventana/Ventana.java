@@ -430,7 +430,7 @@ public class Ventana extends JFrame{
     	
     	Graphics2D g2=(Graphics2D) g;
     	
-    	g2.drawRect(80, 80, 400, 400);
+    	/*g2.drawRect(80, 80, 400, 400);
     	g2.fillRect(200, 200, 200, 200);
     	g2.clearRect(220, 220, 50, 50);
     	
@@ -469,7 +469,81 @@ public class Ventana extends JFrame{
     	int[] xs = {100,100,400};
     	int []ys= {100,200,400};
     	
-    	g2.drawPolygon(xs,ys,3);
+    	g2.drawPolygon(xs,ys,3);*/
+    	
+    	
+    	//casa
+    	
+    	//fondo
+        g.setColor(new Color(135, 206, 250));
+        g.fillRect(0, 0, getWidth(), getHeight());
+
+        g.setColor(Color.YELLOW);
+        g.fillOval(800, 40, 180, 180);
+        
+        g.setColor(new Color(139, 69, 19));
+        g.fillRect(0, getHeight() - 50, getWidth(), 50);
+        g.setColor(new Color(107, 142, 35));
+        g.fillRect(0, getHeight() - 80, getWidth(), 30);
+
+        // la cerca
+        g.setColor(new Color(218, 165, 32));
+        for (int i = 10; i < getWidth(); i += 40) {
+            g.fillRect(i, getHeight() - 170, 30, 100);
+            g.fillRect(i + 5, getHeight() - 190, 20, 20);
+        }
+
+        // Pared dela casa 
+        int casaY = getHeight() - 270;
+        g.setColor(new Color(169, 169, 169));
+        g.fillRect(150, casaY, 300, 200);
+        
+        //para los bloquyes
+        g.setColor(Color.DARK_GRAY);
+        for (int y = casaY; y < casaY + 200; y += 40) {
+            g.drawLine(150, y, 450, y);
+        }
+        for (int x = 150; x <= 450; x += 50) {
+            g.drawLine(x, casaY, x, casaY + 200);
+        }
+
+
+        // Techo
+        g.setColor(new Color(178, 34, 34));
+        g.fillPolygon(new int[]{140, 300, 460}, new int[]{casaY, casaY - 130, casaY}, 3);
+
+        // Chimenea
+        g.setColor(new Color(105, 105, 105));
+        g.fillRect(350, casaY - 120, 40, 70);
+        g.setColor(Color.DARK_GRAY);
+        g.fillRect(340, casaY - 130, 60, 20);
+
+        // Puerta
+        g.setColor(new Color(139, 69, 19));
+        g.fillRect(200, casaY + 70, 70, 130);
+        g.setColor(Color.WHITE);
+        g.fillOval(260, casaY + 135, 8, 8);
+
+        // Ventana
+        g.setColor(new Color(178, 34, 34));
+        g.fillRect(320, casaY + 10, 80, 80);
+        g.setColor(new Color(135, 206, 250));
+        g.fillRect(325, casaY + 15, 30, 30);
+        g.fillRect(365, casaY + 15, 30, 30);
+        g.fillRect(325, casaY + 55, 30, 30);
+        g.fillRect(365, casaY + 55, 30, 30);
+        
+        
+        BufferedImage image;
+    	try {
+    		image = ImageIO.read(new File("chivas.jpg"));
+    		
+    		g2.drawImage(image, 800, 250,200, 200, Color.gray, null);
+    	
+    	}catch(IOException e) {
+    		e.printStackTrace();
+    	}
     }
+
     
 }
