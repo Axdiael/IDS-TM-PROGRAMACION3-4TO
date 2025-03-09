@@ -45,7 +45,7 @@ public class Ventana extends JFrame{
 		this.setTitle(title);
 		//hace visible la ventana
 		//this.setVisible(true);
-		this.setSize(1000, 800);
+		this.setSize(700, 600);
 		//Sirve para ajustar el tamaño de la ventana
 		this.setResizable(true);
 		//Elimina el formato predeterminado de la ventana (ayuda a que funcionen las otras modificaciones)
@@ -57,7 +57,7 @@ public class Ventana extends JFrame{
 		
 		this.setBackground(Color.white);
 		
-		ImageIcon icono = new ImageIcon("logo.png"); 
+		ImageIcon icono = new ImageIcon("mario3.png"); 
 		this.setIconImage(icono.getImage());
 		
         /*ImageIcon fondoImagen = new ImageIcon("fondo.jpg");
@@ -475,7 +475,7 @@ public class Ventana extends JFrame{
     	//casa
     	
     	//fondo
-        g.setColor(new Color(135, 206, 250));
+       /* g.setColor(new Color(135, 206, 250));
         g.fillRect(0, 0, getWidth(), getHeight());
 
         g.setColor(Color.YELLOW);
@@ -542,7 +542,191 @@ public class Ventana extends JFrame{
     	
     	}catch(IOException e) {
     		e.printStackTrace();
+    	}*/
+    	
+    	//Mundo dde mario
+    	 //Fondo
+    	g.setColor(new Color(135, 206, 250));
+        g.fillRect(0, 0, getWidth(), getHeight());
+        
+        //Imagenes de fondo
+        
+        BufferedImage image;
+    	try {
+    		image = ImageIO.read(new File("nubes.png"));
+    		
+    		g2.drawImage(image, 40, 100,150, 100, null, null);
+    		g2.drawImage(image, 220, 100,150, 100, null, null);
+    		g2.drawImage(image, 400, 100,150, 100, null, null);
+    		g2.drawImage(image, 580, 100,150, 100, null, null);
+    		g2.drawImage(image, 760, 100,150, 100, null, null);
+    		
+    		image = ImageIO.read(new File("flor.png"));
+    		g2.drawImage(image, 440, 280,150, 100, null, null);
+    		
+    		image = ImageIO.read(new File("mario.png"));
+    		g2.drawImage(image, 25, 320,90, 90, null, null);
+    	
+    	}catch(IOException e) {
+    		e.printStackTrace();
     	}
+    	
+    	
+
+        //Suelo
+        g.setColor(Color.decode("#D2691E"));
+        g.fillRect(0, getHeight() - 50, getWidth(), 50);
+        g.setColor(Color.decode("#F4A460"));
+        g.fillRect(0, getHeight() - 80, getWidth(), 30);
+        
+        
+        //cuadros de fonfo
+        int cuadroY = getHeight() - 260;
+        //cuadro1
+        
+        g.setColor(Color.black); 
+        g.fillRect(250, cuadroY - 60, 170, 240);
+        
+        g.setColor(Color.decode("#71c2ff")); 
+        g.fillRect(250, cuadroY - 80, 150, 260);
+        
+        g.setColor(Color.BLACK);
+        g.drawRect(250, cuadroY - 80, 150, 260);
+        
+        g.fillOval(255, cuadroY - 69, 16, 16);
+        g.fillOval(381, cuadroY - 69, 16, 16);
+        g.fillOval(381, cuadroY + 161, 16, 16);
+        
+        g.setColor(Color.GRAY);
+        g.fillOval(255, cuadroY - 70, 15, 15);
+        g.fillOval(380, cuadroY - 70, 15, 15);
+        g.fillOval(380, cuadroY + 160, 15, 15);
+        
+       /* g.setColor(Color.BLACK);
+        g.drawLine(255, cuadroY - 70, 265, cuadroY - 60);
+        g.drawLine(380, cuadroY - 70, 390, cuadroY - 60);
+        g.drawLine(380, cuadroY + 160, 390, cuadroY + 170);*/
+       
+        
+        
+        //cuadro 2
+        
+        g.setColor(Color.black);
+        g.fillRect(150, cuadroY+40, 180, 140);
+	
+        g.setColor(Color.decode("#ffc4b4"));
+        g.fillRect(150, cuadroY+20, 160, 160);
+        
+        g.setColor(Color.BLACK);
+        g.drawRect(150, cuadroY+20, 160, 160);
+        
+        g.setColor(Color.black);
+        g.fillOval(154, cuadroY + 31, 16, 16);  
+        g.fillOval(291, cuadroY + 31, 16, 16);
+        g.fillOval(154, cuadroY + 161, 16, 16);
+        g.fillOval(291, cuadroY + 161, 16, 16);
+        
+        g.setColor(Color.GRAY);
+        g.fillOval(153, cuadroY + 30, 15, 15);  
+        g.fillOval(290, cuadroY + 30, 15, 15);
+        g.fillOval(153, cuadroY + 160, 15, 15);
+        g.fillOval(290, cuadroY + 160, 15, 15);
+        
+        /*g.setColor(Color.BLACK);
+        g.drawLine(153, cuadroY + 30, 163, cuadroY + 40);
+        g.drawLine(290, cuadroY + 30, 300, cuadroY + 40);
+        g.drawLine(153, cuadroY + 160, 163, cuadroY + 170);
+        g.drawLine(290, cuadroY + 160, 300, cuadroY + 170);*/
+        
+        //cuadro3
+        g.setColor(Color.decode("#00dd5b")); 
+        g.fillRect(600, cuadroY + 20, 160, 160);
+        
+        g.setColor(Color.black);
+        
+        g.fillOval(606, cuadroY + 31, 16, 16);
+        g.fillOval(741, cuadroY + 31, 16, 16);
+        g.fillOval(606, cuadroY + 161, 16, 16);
+        g.fillOval(741, cuadroY + 161, 16, 16);
+        
+        g.setColor(Color.GRAY);
+        g.drawRect(600, cuadroY + 20, 160, 160);
+        
+        g.fillOval(605, cuadroY + 30, 15, 15);
+        g.fillOval(740, cuadroY + 30, 15, 15);
+        g.fillOval(605, cuadroY + 160, 15, 15);
+        g.fillOval(740, cuadroY + 160, 15, 15);
+        
+       /* g.setColor(Color.BLACK);
+        g.drawLine(605, cuadroY + 30, 615, cuadroY + 40);
+        g.drawLine(740, cuadroY + 30, 750, cuadroY + 40);
+        g.drawLine(605, cuadroY + 160, 615, cuadroY + 170);
+        g.drawLine(740, cuadroY + 160, 750, cuadroY + 170);*/
+        
+        //Cuadros flotanets 
+        int cuadroFlotante1Y = getHeight() - 350;
+        g.setColor(Color.BLACK);
+        g.fillRect(50, cuadroFlotante1Y, 43, 43);
+        
+        g.setColor(Color.decode("#FF8A4E"));
+        g.fillRect(50, cuadroFlotante1Y, 40, 40);
+        
+        g.setColor(Color.BLACK);
+        g.drawRect(50, cuadroFlotante1Y, 40, 40);
+        
+        g.fillOval(53, cuadroFlotante1Y + 2, 4, 4);
+        g.fillOval(83, cuadroFlotante1Y + 2, 4, 4);
+        g.fillOval(53, cuadroFlotante1Y + 32, 4, 4);
+        g.fillOval(83, cuadroFlotante1Y + 32, 4, 4);
+        
+        int cuadroFlotante2Y = getHeight() - 440;
+        
+        g.setColor(Color.BLACK);
+        g.fillRect(200, cuadroFlotante2Y, 83, 43);
+        
+        g.setColor(Color.decode("#FF8A4E"));
+        g.fillRect(200, cuadroFlotante2Y, 40, 40);
+        g.fillRect(240, cuadroFlotante2Y, 40, 40);
+        
+        g.setColor(Color.BLACK);
+        g.drawRect(200, cuadroFlotante2Y, 40, 40);
+        g.drawRect(240, cuadroFlotante2Y, 40, 40);
+        
+        g.fillOval(203, cuadroFlotante2Y + 2, 4, 4);
+        g.fillOval(233, cuadroFlotante2Y + 2, 4, 4);
+        g.fillOval(203, cuadroFlotante2Y + 32, 4, 4);
+        g.fillOval(233, cuadroFlotante2Y + 32, 4, 4);
+        
+        g.fillOval(243, cuadroFlotante2Y + 2, 4, 4);
+        g.fillOval(273, cuadroFlotante2Y + 2, 4, 4);
+        g.fillOval(243, cuadroFlotante2Y + 32, 4, 4);
+        g.fillOval(273, cuadroFlotante2Y + 32, 4, 4);
+        
+        int cuadroFlotante3Y = getHeight() - 380;
+        
+        g.setColor(Color.BLACK);
+        g.fillRect(650, cuadroFlotante3Y, 43, 43);
+        
+        g.setColor(Color.decode("#FF8A4E"));
+        g.fillRect(650, cuadroFlotante3Y, 40, 40);
+        
+        g.setColor(Color.BLACK);
+        g.drawRect(650, cuadroFlotante3Y, 40, 40);
+        
+        g.fillOval(653, cuadroFlotante3Y + 2, 4, 4);
+        g.fillOval(683, cuadroFlotante3Y + 2, 4, 4);
+        g.fillOval(653, cuadroFlotante3Y + 32, 4, 4);
+        g.fillOval(683, cuadroFlotante3Y + 32, 4, 4);
+        
+        //tubo
+        g.setColor(Color.decode("#008000"));
+        g.fillRect(465, getHeight() - 200, 95, 120);
+        g.fillRect(462, getHeight() - 240, 100, 60);
+        
+        g.setColor(Color.BLACK);
+        g.drawRect(450, getHeight() - 180, 110, 100);
+        g.drawRect(447, getHeight() - 240, 115, 60);
+        
     }
 
     
