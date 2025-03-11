@@ -546,7 +546,7 @@ public class Ventana extends JFrame{
     	
     	//Mundo dde mario
     	 //Fondo
-    	g.setColor(new Color(135, 206, 250));
+    	/*g.setColor(new Color(135, 206, 250));
         g.fillRect(0, 0, getWidth(), getHeight());
         
         //Imagenes de fondo
@@ -605,7 +605,7 @@ public class Ventana extends JFrame{
        /* g.setColor(Color.BLACK);
         g.drawLine(255, cuadroY - 70, 265, cuadroY - 60);
         g.drawLine(380, cuadroY - 70, 390, cuadroY - 60);
-        g.drawLine(380, cuadroY + 160, 390, cuadroY + 170);*/
+        g.drawLine(380, cuadroY + 160, 390, cuadroY + 170);
        
         
         
@@ -632,12 +632,6 @@ public class Ventana extends JFrame{
         g.fillOval(153, cuadroY + 160, 15, 15);
         g.fillOval(290, cuadroY + 160, 15, 15);
         
-        /*g.setColor(Color.BLACK);
-        g.drawLine(153, cuadroY + 30, 163, cuadroY + 40);
-        g.drawLine(290, cuadroY + 30, 300, cuadroY + 40);
-        g.drawLine(153, cuadroY + 160, 163, cuadroY + 170);
-        g.drawLine(290, cuadroY + 160, 300, cuadroY + 170);*/
-        
         //cuadro3
         g.setColor(Color.decode("#00dd5b")); 
         g.fillRect(600, cuadroY + 20, 160, 160);
@@ -656,12 +650,6 @@ public class Ventana extends JFrame{
         g.fillOval(740, cuadroY + 30, 15, 15);
         g.fillOval(605, cuadroY + 160, 15, 15);
         g.fillOval(740, cuadroY + 160, 15, 15);
-        
-       /* g.setColor(Color.BLACK);
-        g.drawLine(605, cuadroY + 30, 615, cuadroY + 40);
-        g.drawLine(740, cuadroY + 30, 750, cuadroY + 40);
-        g.drawLine(605, cuadroY + 160, 615, cuadroY + 170);
-        g.drawLine(740, cuadroY + 160, 750, cuadroY + 170);*/
         
         //Cuadros flotanets 
         int cuadroFlotante1Y = getHeight() - 350;
@@ -725,9 +713,338 @@ public class Ventana extends JFrame{
         
         g.setColor(Color.BLACK);
         g.drawRect(450, getHeight() - 180, 110, 100);
-        g.drawRect(447, getHeight() - 240, 115, 60);
+        g.drawRect(447, getHeight() - 240, 115, 60);*/
+    	
+    	//mario 2
+    	//fondo
+    	
+    	g.setColor(new Color(6,101,192,255));
+        g.fillRect(0, 0, getWidth(), getHeight());
         
-    }
+        //nubes traseras
+        
+        g.setColor(new Color(178,211,214,255));
+        g.fillRoundRect(85, 420, 155, 35, 60, 60);
+        g.setColor(new Color(236,243,254,255));
+        g.fillRoundRect(85, 420, 150, 30, 60, 60);
+        
+        g.setColor(new Color(178,211,214,255));
+        g.fillRoundRect(85, 150, 155, 35, 60, 60);
+        g.setColor(new Color(236,243,254,255));
+        g.fillRoundRect(85, 150, 150, 30, 60, 60);
+        
+        g.setColor(new Color(178,211,214,255));
+        g.fillRoundRect(175, 190, 155, 35, 60, 60);
+        g.setColor(new Color(236,243,254,255));
+        g.fillRoundRect(175, 190, 150, 30, 60, 60);
+        
+        g.setColor(new Color(178,211,214,255));
+        g.fillRoundRect(355, 160, 155, 35, 60, 60);
+        g.setColor(new Color(236,243,254,255));
+        g.fillRoundRect(355, 160, 150, 30, 60, 60);
+        
+        g.setColor(new Color(178,211,214,255));
+        g.fillRoundRect(230, 455, 155, 35, 60, 60);
+        g.setColor(new Color(236,243,254,255));
+        g.fillRoundRect(230, 455, 150, 30, 60, 60);
+        
+        g.setColor(new Color(178,211,214,255));
+        g.fillRoundRect(230, 400, 155, 35, 60, 60);
+        g.setColor(new Color(236,243,254,255));
+        g.fillRoundRect(230, 400, 150, 30, 60, 60);
+        
+        g.setColor(new Color(178,211,214,255));
+        g.fillRoundRect(470, 220, 155, 35, 60, 60);
+        g.setColor(new Color(236,243,254,255));
+        g.fillRoundRect(470, 220, 150, 30, 60, 60);
+        
+        
+        g.setColor(new Color(178,211,214,255));
+        g.fillRoundRect(540, 180, 155, 35, 60, 60);
+        g.setColor(new Color(236,243,254,255));
+        g.fillRoundRect(540, 180, 150, 30, 60, 60);
+        
+    	 
+        //montañas fondo
+        //1
+        g.setColor(new Color(149, 193, 199, 255));
+        g.fillRoundRect(17,250,120,500, 120, 120);
+        g.setColor(new Color(180, 238, 247));
+        g.fillRoundRect(15,250,105,500, 120, 120);
+        
+        //2
+        g.setColor(new Color(149, 193, 199, 255));
+        g.fillRoundRect(302,250,120,500, 120, 120);
+        g.setColor(new Color(180, 238, 247));
+        g.fillRoundRect(300,250,105,500, 120, 120);
+        
+        //3
+        g.setColor(new Color(149, 193, 199, 255));
+        g.fillRoundRect(424,150,120,500, 120, 120);
+        g.setColor(new Color(180, 238, 247));
+        g.fillRoundRect(422,150,105,500, 120, 120);
+        
+        //nubes en medio
+        g.setColor(new Color(178,211,214,255));
+        g.fillRoundRect(170, 330, 155, 35, 60, 60);
+        g.setColor(new Color(236,243,254,255));
+        g.fillRoundRect(170, 330, 150, 30, 60, 60);
+        
+        g.setColor(new Color(178,211,214,255));
+        g.fillRoundRect(370, 330, 155, 35, 60, 60);
+        g.setColor(new Color(236,243,254,255));
+        g.fillRoundRect(370, 330, 150, 30, 60, 60);
+        
+        g.setColor(new Color(178,211,214,255));
+        g.fillRoundRect(-10, 300, 155, 35, 60, 60);
+        g.setColor(new Color(236,243,254,255));
+        g.fillRoundRect(-10, 300, 150, 30, 60, 60);
+        
+        //montañas de frente
+        //1
+        g.setColor(new Color(18,81,117,255));
+        g.fillRoundRect(-124,398,220,500, 180, 180);
+        g.setColor(new Color(118,178,215,255));
+        g.fillRoundRect(-120,400,200,500, 180, 180);
+        
+        //2
+        g.setColor(new Color(18,81,117,255));
+        g.fillRoundRect(296,398,190,500, 180, 180);
+        g.setColor(new Color(118,178,215,255));
+        g.fillRoundRect(300,400,170,500, 180, 180);
+        
+        //3
+        
+        g.setColor(new Color(18,81,117,255));
+        g.fillRoundRect(482,268,190,500, 180, 180);
+        g.setColor(new Color(118,178,215,255));
+        g.fillRoundRect(486,270,170,500, 180, 180);
+        
+        //suelo
+        g.setColor(new Color(207,158,95,255));
+        g.fillRect(0, getHeight() - 70, getWidth(), 70);
+        
+        g.setColor(new Color(24,178,42,255));
+        g.fillRect(0, getHeight() - 80, getWidth(), 10);
+        g.setColor(Color.BLACK);
+        g.drawRect(0, getHeight() - 80, getWidth(), 10);
+        
+        //tubo
+        
+        g.setColor(Color.black);
+        g.fillRect(330, getHeight() - 190, 	115, 110);
+        g.fillRect(322, getHeight() - 230, 132, 40);
+        
+        g.setColor(Color.decode("#6E6BB7"));
+        g.fillRect(330, getHeight() - 185, 	110, 105);
+        g.fillRect(325, getHeight() - 230, 125, 40);
+        
+        g2.setStroke(new BasicStroke(3));
+        g.setColor(Color.BLACK);
+        g.drawRect(330, getHeight() - 190, 115, 110);
+        g.drawRect(322, getHeight() - 230, 132, 40);
+        
+        g2.setStroke(new BasicStroke(10)); 
+        g.setColor(new Color(215, 225, 251)); 
+        
+        g.drawLine(375, getHeight() - 180, 375, getHeight() - 88);
 
-    
+        g.drawLine(365, getHeight() - 225, 365, getHeight() - 197);
+        
+       
+        int desplazamientoX = 270;
+        int alturaReducida = 50; 
+
+        g.setColor(Color.black);
+        g.fillRect(330 + desplazamientoX, getHeight() - 190 + alturaReducida, 115, 110 - alturaReducida);
+        g.fillRect(322 + desplazamientoX, getHeight() - 230 + alturaReducida, 132, 40);
+
+        g.setColor(Color.decode("#6E6BB7"));
+        g.fillRect(330 + desplazamientoX, getHeight() - 185 + alturaReducida, 110, 105 - alturaReducida);
+        g.fillRect(325 + desplazamientoX, getHeight() - 230 + alturaReducida, 125, 40);
+
+        g2.setStroke(new BasicStroke(3));
+        g.setColor(Color.BLACK);
+        g.drawRect(330 + desplazamientoX, getHeight() - 190 + alturaReducida, 115, 110 - alturaReducida);
+        g.drawRect(322 + desplazamientoX, getHeight() - 230 + alturaReducida, 132, 40);
+
+        g2.setStroke(new BasicStroke(10)); 
+        g.setColor(new Color(215, 225, 251)); 
+
+        g.drawLine(375 + desplazamientoX, getHeight() - 180 + alturaReducida, 375 + desplazamientoX, getHeight() - 88 );
+        g.drawLine(365 + desplazamientoX, getHeight() - 225 + alturaReducida, 365 + desplazamientoX, getHeight() - 197 + alturaReducida);
+        
+        //Circulos
+        
+        //1
+        
+        g.setColor(new Color(242,242,255,255));
+        g.fillOval(35, 270, 15, 25);
+        g.fillOval(70, 335, 15, 25);
+        
+        //2
+        g.setColor(new Color(242,242,255,255));
+        g.fillOval(375, 290, 15, 25);
+        g.fillOval(320, 315, 15, 25);
+        g.fillOval(340, 290, 15, 25);
+        
+        //3
+        g.setColor(new Color(242,242,255,255));
+        g.fillOval(475, 190, 15, 25);
+        g.fillOval(445, 230, 15, 25);
+        g.fillOval(440, 190, 15, 25);
+        
+        //4
+        g.setColor(new Color(242,242,255,255));
+        g.fillOval(575, 290, 15, 25);
+        g.fillOval(540, 290, 15, 25);
+        
+        //piedras
+        
+        g.setColor(new Color(115,112,113,255));
+        g.fillRoundRect(521,478,43,44, 15, 35);
+        g.setColor(new Color(198,197,204,255));
+        g.fillRoundRect(520,478,40,38, 15, 35);
+        
+        g.setColor(new Color(115,112,113,255));
+        g.fillRoundRect(521,434,43,44, 15, 35);
+        g.setColor(new Color(198,197,204,255));
+        g.fillRoundRect(520,434,40,38, 15, 35);
+        
+        g.setColor(new Color(115,112,113,255));
+        g.fillRoundRect(521,390,43,44, 15, 35);
+        g.setColor(new Color(198,197,204,255));
+        g.fillRoundRect(520,390,40,38, 15, 35);
+        
+        g.setColor(new Color(115,112,113,255));
+        g.fillRoundRect(521,346,43,44, 15, 35);
+        g.setColor(new Color(198,197,204,255));
+        g.fillRoundRect(520,346,40,38, 15, 35);
+        
+        g2.setStroke(new BasicStroke(2));
+        g.setColor(Color.black);
+        g.drawRoundRect(521,346,43,44, 15, 35);
+        g.drawRoundRect(521,478,43,44, 15, 35);
+        g.drawRoundRect(521,434,43,44, 15, 35);
+        g.drawRoundRect(521,390,43,44, 15, 35);
+        g.drawRoundRect(521,346,43,44, 15, 35);
+        
+        //derecha
+        
+        g.setColor(new Color(115,112,113,255));
+        g.fillRoundRect(791,478,43,44, 15, 35);
+        g.setColor(new Color(198,197,204,255));
+        g.fillRoundRect(790,478,40,38, 15, 35);
+        
+        g.setColor(new Color(115,112,113,255));
+        g.fillRoundRect(791,434,43,44, 15, 35);
+        g.setColor(new Color(198,197,204,255));
+        g.fillRoundRect(790,434,40,38, 15, 35);
+        
+        g.setColor(new Color(115,112,113,255));
+        g.fillRoundRect(791,390,43,44, 15, 35);
+        g.setColor(new Color(198,197,204,255));
+        g.fillRoundRect(790,390,40,38, 15, 35);
+        
+        g.setColor(new Color(115,112,113,255));
+        g.fillRoundRect(791,346,43,44, 15, 35);
+        g.setColor(new Color(198,197,204,255));
+        g.fillRoundRect(790,346,40,38, 15, 35);
+        
+        g2.setStroke(new BasicStroke(2));
+        g.setColor(Color.black);
+        g.drawRoundRect(791,478,43,44, 15, 35);
+        g.drawRoundRect(791,434,43,44, 15, 35);
+        g.drawRoundRect(791,390,43,44, 15, 35);
+        g.drawRoundRect(791,346,43,44, 15, 35);
+        
+        //amarillos
+        
+        g.setColor(new Color(221,159,62,255));
+        g.fillRoundRect(566,346,43,44, 15, 35);
+        g.setColor(new Color(255,213,46,255));
+        g.fillRoundRect(565,346,40,38, 15, 35);
+        
+        g.setColor(new Color(221,159,62,255));
+        g.fillRoundRect(611,346,43,44, 15, 35);
+        g.setColor(new Color(255,213,46,255));
+        g.fillRoundRect(610,346,40,38, 15, 35);
+        
+        g.setColor(new Color(221,159,62,255));
+        g.fillRoundRect(656,346,43,44, 15, 35);
+        g.setColor(new Color(255,213,46,255));
+        g.fillRoundRect(655,346,40,38, 15, 35);
+        
+        g.setColor(new Color(221,159,62,255));
+        g.fillRoundRect(701,346,43,44, 15, 35);
+        g.setColor(new Color(255,213,46,255));
+        g.fillRoundRect(700,346,40,38, 15, 35);
+        
+        g.setColor(new Color(221,159,62,255));
+        g.fillRoundRect(746,346,43,44, 15, 35);
+        g.setColor(new Color(255,213,46,255));
+        g.fillRoundRect(745,346,40,38, 15, 35);
+        
+        g2.setStroke(new BasicStroke(2));
+        g.setColor(Color.black);
+        g.drawRoundRect(566,346,43,44, 15, 35);
+        g.drawRoundRect(611,346,43,44, 15, 35);
+        g.drawRoundRect(656,346,43,44, 15, 35);
+        g.drawRoundRect(701,346,43,44, 15, 35);
+        g.drawRoundRect(746,346,43,44, 15, 35);
+        
+        //ojos
+        
+        g.setColor(Color.black);
+        g.fillOval(570, 355, 5, 15);
+        
+        g.setColor(Color.black);
+        g.fillOval(590, 355, 5, 15);
+        
+        g.setColor(Color.black);
+        g.fillOval(620, 355, 5, 15);
+        
+        g.setColor(Color.black);
+        g.fillOval(640, 355, 5, 15);
+        
+        g.setColor(Color.black);
+        g.fillOval(670, 355, 5, 15);
+        
+        g.setColor(Color.black);
+        g.fillOval(690, 355, 5, 15);
+        
+        g.setColor(Color.black);
+        g.fillOval(710, 355, 5, 15);
+        
+        g.setColor(Color.black);
+        g.fillOval(730, 355, 5, 15);
+        
+        g.setColor(Color.black);
+        g.fillOval(760, 355, 5, 15);
+        
+        g.setColor(Color.black);
+        g.fillOval(780, 355, 5, 15);
+        
+        //Imagenes de fondo
+        
+        BufferedImage image;
+    	try {
+    		image = ImageIO.read(new File("flor.png"));
+    		g2.drawImage(image, 320, 287,150, 100, null, null);
+    		
+    		image = ImageIO.read(new File("mario.png"));
+    		g2.drawImage(image, 25, 320,90, 90, null, null);
+    		
+    		image = ImageIO.read(new File("goompa.png"));
+    		g2.drawImage(image, 200, 481,40, 40, null, null);
+    		g2.drawImage(image, 150, 481,40, 40, null, null);
+    		g2.drawImage(image, 250, 481,40, 40, null, null);
+    	
+    	}catch(IOException e) {
+    		e.printStackTrace();
+    	}
+        
+	}
+	
+   
 }
