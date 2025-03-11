@@ -9,12 +9,16 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.color.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Set;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractButton;
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -45,11 +49,11 @@ public class Ventana extends JFrame{
 		this.setTitle(title);
 		//hace visible la ventana
 		//this.setVisible(true);
-		this.setSize(700, 600);
+		this.setSize(1000, 700);
 		//Sirve para ajustar el tamaño de la ventana
 		this.setResizable(true);
 		//Elimina el formato predeterminado de la ventana (ayuda a que funcionen las otras modificaciones)
-		this.setLayout(new BorderLayout(10, 10));
+		this.setLayout(new BorderLayout(20, 0));
 		//que pasa cuando cierro mi aplicación
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//Sobre que elemento colocare el item
@@ -63,14 +67,15 @@ public class Ventana extends JFrame{
         /*ImageIcon fondoImagen = new ImageIcon("fondo.jpg");
         JLabel fondo = new JLabel(fondoImagen);
         fondo.setBounds(0, 0, 1000, 700);
-        this.setContentPane(fondo);
+        this.setContentPane(fondo);*/
         
         
         //panel principal
         JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setOpaque(false);
-		panel.setBounds(0, 0, 1000, 700);
+		
+		panel.setBounds(0, 0, 500, 700);
 		this.add(panel);
       
 		//TITULO ACCEDER 
@@ -206,75 +211,101 @@ public class Ventana extends JFrame{
         accederButton.setForeground(Color.black);
         this.add(accederButton);
         
+        accederButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				if (usuarioField.getText().equals("")) {
+					
+					usuarioField.setBorder(BorderFactory.createLineBorder(Color.red,3));
+					
+				}else {
+					
+					usuarioField.setBorder(BorderFactory.createLineBorder(Color.green,3));
+				}
+				
+				 if (String.valueOf(contraseñaField.getPassword()).equals("")) {
+			            contraseñaField.setBorder(BorderFactory.createLineBorder(Color.red, 3));
+			        } else {
+			            contraseñaField.setBorder(BorderFactory.createLineBorder(Color.green, 3));
+			        }
+			}
+		});
+        
+        
+        //registro
         
         JPanel panelRegistro = new JPanel();
-        panelRegistro.setBounds(500, 0, 500, 500);
+        panelRegistro.setBounds(500, 0, 500, 700);
         panelRegistro.setBackground(Color.decode("#00BFFF"));
         panelRegistro.setLayout(null);
-        this.add(panelRegistro);/*
+        this.add(panelRegistro);
+        
 
-        /*JLabel tituloRegistro = new JLabel("REGISTRO", SwingConstants.CENTER);
-        tituloRegistro.setBounds(0, 20, 500, 40);
+        JLabel tituloRegistro = new JLabel("REGISTRO", SwingConstants.CENTER);
+        tituloRegistro.setBounds(500, 20, 500, 40);
         tituloRegistro.setFont(texto);
         tituloRegistro.setForeground(Color.BLACK);
         panelRegistro.add(tituloRegistro);
 
         JLabel registroUsuarioLabel = new JLabel("NOMBRE DE USUARIO:");
-        registroUsuarioLabel.setBounds(50, 80, 250, 30);
+        registroUsuarioLabel.setBounds(500, 80, 250, 30);
         registroUsuarioLabel.setFont(texto2);
         panelRegistro.add(registroUsuarioLabel);
 
         JTextField registroUsuarioField = new JTextField();
-        registroUsuarioField.setBounds(50, 120, 400, 30);
+        registroUsuarioField.setBounds(500, 120, 400, 30);
         registroUsuarioField.setFont(texto2);
         panelRegistro.add(registroUsuarioField);
 
         JLabel bioLabel = new JLabel("BIO:");
-        bioLabel.setBounds(50, 170, 200, 30);
+        bioLabel.setBounds(500, 170, 200, 30);
         bioLabel.setFont(texto2);
         panelRegistro.add(bioLabel);
 
         JTextField bioField = new JTextField();
-        bioField.setBounds(50, 210, 400, 30);
+        bioField.setBounds(500, 210, 400, 30);
         bioField.setFont(texto2);
         panelRegistro.add(bioField);
 
         JLabel preferenciasLabel = new JLabel("PREFERENCIAS:");
-        preferenciasLabel.setBounds(50, 260, 200, 30);
+        preferenciasLabel.setBounds(500, 260, 200, 30);
         preferenciasLabel.setFont(texto2);
         panelRegistro.add(preferenciasLabel);
 
         JCheckBox dulceCheck = new JCheckBox("Dulces");
-        dulceCheck.setBounds(50, 300, 100, 30);
+        dulceCheck.setBounds(500, 300, 100, 30);
         dulceCheck.setFont(texto3);
         dulceCheck.setBackground(Color.decode("#00BFFF"));
         panelRegistro.add(dulceCheck);
 
         JCheckBox saladoCheck = new JCheckBox("Salado");
-        saladoCheck.setBounds(150, 300, 100, 30);
+        saladoCheck.setBounds(600, 300, 100, 30);
         saladoCheck.setFont(texto3);
         saladoCheck.setBackground(Color.decode("#00BFFF"));
         panelRegistro.add(saladoCheck);
 
         JCheckBox saludableCheck = new JCheckBox("Saludable");
-        saludableCheck.setBounds(250, 300, 100, 30);
+        saludableCheck.setBounds(700, 300, 100, 30);
         saludableCheck.setFont(texto3);
         saludableCheck.setBackground(Color.decode("#00BFFF"));
         panelRegistro.add(saludableCheck);
 
         JLabel terminosLabel = new JLabel("TÉRMINOS:");
-        terminosLabel.setBounds(50, 330, 200, 30);
+        terminosLabel.setBounds(500, 330, 200, 30);
         terminosLabel.setFont(texto2);
         panelRegistro.add(terminosLabel);
 
         JRadioButton aceptarTerminos = new JRadioButton("Acepto los términos");
-        aceptarTerminos.setBounds(50, 370, 200, 30);
+        aceptarTerminos.setBounds(500, 370, 200, 30);
         aceptarTerminos.setFont(texto3);
         aceptarTerminos.setBackground(Color.decode("#00BFFF"));
         panelRegistro.add(aceptarTerminos);
 
         JRadioButton noAceptarTerminos = new JRadioButton("No acepto los términos");
-        noAceptarTerminos.setBounds(250, 370, 200, 30);
+        noAceptarTerminos.setBounds(700, 370, 200, 30);
         noAceptarTerminos.setFont(texto3);
         noAceptarTerminos.setBackground(Color.decode("#00BFFF"));
         panelRegistro.add(noAceptarTerminos);
@@ -287,15 +318,72 @@ public class Ventana extends JFrame{
         
         String[] coloniasDataset = { "Centro", "Villas del Encanto", "Pedregal", "Camino Real", "Fuerza Aérea" };
         JComboBox<String> colonias = new JComboBox<>(coloniasDataset);
-        colonias.setBounds(150, 420, 200, 30);
+        colonias.setBounds(600, 420, 200, 30);
         panelRegistro.add(colonias);
         
         JButton crearCuentaButton = new JButton("Crear cuenta");
-        crearCuentaButton.setBounds(150, 460, 200, 50);
+        crearCuentaButton.setBounds(600, 460, 200, 50);
         crearCuentaButton.setFont(texto2);
         crearCuentaButton.setBackground(Color.WHITE);
         crearCuentaButton.setForeground(Color.BLACK);
-        panelRegistro.add(crearCuentaButton);*/
+        panelRegistro.add(crearCuentaButton);
+        
+        crearCuentaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (registroUsuarioField.getText().equals("")) {
+                    registroUsuarioField.setBorder(BorderFactory.createLineBorder(Color.red, 3));
+                } else {
+                    registroUsuarioField.setBorder(BorderFactory.createLineBorder(Color.green, 3));
+                }
+
+                if (bioField.getText().equals("")) {
+                    bioField.setBorder(BorderFactory.createLineBorder(Color.red, 3));
+                } else {
+                    bioField.setBorder(BorderFactory.createLineBorder(Color.green, 3));
+                }
+                
+                if ( dulceCheck.isSelected()) {
+                	dulceCheck.setBorder(BorderFactory.createLineBorder(Color.red, 5));
+                	System.out.println("Dulce seleccioando");
+                } else {
+                	dulceCheck.setBorder(BorderFactory.createLineBorder(Color.green, 5));
+                	
+                	System.out.println("x");
+                }
+                
+                if ( saladoCheck.isSelected()) {
+                	saladoCheck.setBorder(BorderFactory.createLineBorder(Color.red, 5));
+                	System.out.println("salado seleccionado");
+                } else {
+                	saladoCheck.setBorder(BorderFactory.createLineBorder(Color.green, 5));
+                	
+                	System.out.println("x");
+                }
+                
+                if ( saludableCheck.isSelected()) {
+                	saludableCheck.setBorder(BorderFactory.createLineBorder(Color.red, 5));
+                	System.out.println("saludable seleccionado");
+                } else {
+                	saludableCheck.setBorder(BorderFactory.createLineBorder(Color.green, 5));
+                	
+                	System.out.println("x");
+                }
+                
+                if ( aceptarTerminos.isSelected()) {
+                	aceptarTerminos.setBorder(BorderFactory.createLineBorder(Color.red, 5));
+                	System.out.println("Aceptado");
+                } else {
+                	aceptarTerminos.setBorder(BorderFactory.createLineBorder(Color.green, 5));
+                	
+                	System.out.println("debes seleccionar Aceptar");
+                }
+                
+                
+                
+            }
+        });
+        
         
         // PANEL DE CALCULADORA
        /* JPanel panelCalculadora = new JPanel();
@@ -424,13 +512,13 @@ public class Ventana extends JFrame{
         
 	}
 	
-	@Override
+	/*@Override
 	public void paint (Graphics g) {
     	super.paint(g);
     	
     	Graphics2D g2=(Graphics2D) g;
     	
-    	/*g2.drawRect(80, 80, 400, 400);
+    	g2.drawRect(80, 80, 400, 400);
     	g2.fillRect(200, 200, 200, 200);
     	g2.clearRect(220, 220, 50, 50);
     	
@@ -713,7 +801,7 @@ public class Ventana extends JFrame{
         
         g.setColor(Color.BLACK);
         g.drawRect(450, getHeight() - 180, 110, 100);
-        g.drawRect(447, getHeight() - 240, 115, 60);*/
+        g.drawRect(447, getHeight() - 240, 115, 60);
     	
     	//mario 2
     	//fondo
@@ -1042,9 +1130,9 @@ public class Ventana extends JFrame{
     	
     	}catch(IOException e) {
     		e.printStackTrace();
-    	}
+    	}*/
         
 	}
 	
    
-}
+
