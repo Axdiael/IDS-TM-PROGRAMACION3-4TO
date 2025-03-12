@@ -28,6 +28,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
@@ -211,7 +212,7 @@ public class Ventana extends JFrame{
         accederButton.setForeground(Color.black);
         this.add(accederButton);
         
-        accederButton.addActionListener(new ActionListener() {
+        /*accederButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -233,6 +234,25 @@ public class Ventana extends JFrame{
 			        }
 			}
 		});
+        */
+        accederButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String correoIngresado = usuarioField.getText();
+                String contraseñaIngresada = new String(contraseñaField.getPassword());
+
+                if (correoIngresado.equals("axtr_23@alu.uabcs.mx") && contraseñaIngresada.equals("7777")) {
+                    JOptionPane.showMessageDialog(null, "Bienvenido.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                    usuarioField.setBorder(BorderFactory.createLineBorder(Color.green,3));
+                    contraseñaField.setBorder(BorderFactory.createLineBorder(Color.green, 3));
+                    
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error: Usuario o contraseña incorrectos.", "Error", JOptionPane.ERROR_MESSAGE);
+                    usuarioField.setBorder(BorderFactory.createLineBorder(Color.red,3));
+                    contraseñaField.setBorder(BorderFactory.createLineBorder(Color.red, 3));
+                }
+            }
+        });
         
         
         //registro
