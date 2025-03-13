@@ -39,6 +39,8 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JComboBox;
 
+
+
 public class Ventana extends JFrame{
 	
 	Font texto = new Font("Andale Mono", Font.BOLD, 22);
@@ -60,7 +62,7 @@ public class Ventana extends JFrame{
 		//Sobre que elemento colocare el item
 		this.setLocationRelativeTo(null);
 		
-		this.setBackground(Color.white);
+		this.setBackground(Color.blue);
 		
 		ImageIcon icono = new ImageIcon("mario3.png"); 
 		this.setIconImage(icono.getImage());
@@ -71,6 +73,7 @@ public class Ventana extends JFrame{
         this.setContentPane(fondo);*/
         
         
+		
         //panel principal
         JPanel panel = new JPanel();
 		panel.setLayout(null);
@@ -202,7 +205,6 @@ public class Ventana extends JFrame{
         this.revalidate();
         
         
-       
         //Acceder
         
         JButton accederButton = new JButton("Acceder");
@@ -235,7 +237,10 @@ public class Ventana extends JFrame{
 			}
 		});
         */
+        
+        
         accederButton.addActionListener(new ActionListener() {
+        	
             @Override
             public void actionPerformed(ActionEvent e) {
                 String correoIngresado = usuarioField.getText();
@@ -243,17 +248,41 @@ public class Ventana extends JFrame{
 
                 if (correoIngresado.equals("axtr_23@alu.uabcs.mx") && contraseñaIngresada.equals("7777")) {
                     JOptionPane.showMessageDialog(null, "Bienvenido.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-                    usuarioField.setBorder(BorderFactory.createLineBorder(Color.green,3));
-                    contraseñaField.setBorder(BorderFactory.createLineBorder(Color.green, 3));
                     
                 } else {
                     JOptionPane.showMessageDialog(null, "Error: Usuario o contraseña incorrectos.", "Error", JOptionPane.ERROR_MESSAGE);
-                    usuarioField.setBorder(BorderFactory.createLineBorder(Color.red,3));
-                    contraseñaField.setBorder(BorderFactory.createLineBorder(Color.red, 3));
+                   
                 }
+                
+                if (usuarioField.getText().equals("axtr_23@alu.uabcs.mx")) {
+					
+                	usuarioField.setBorder(BorderFactory.createLineBorder(Color.green,3));
+					
+					
+				}else {
+					
+					usuarioField.setBorder(BorderFactory.createLineBorder(Color.red,3));
+					
+				}
+				
+				 if (!String.valueOf(contraseñaField.getPassword()).equals("7777")) {
+			            contraseñaField.setBorder(BorderFactory.createLineBorder(Color.red, 3));
+			        } else {
+			            contraseñaField.setBorder(BorderFactory.createLineBorder(Color.green, 3));
+			        }
+                
             }
         });
         
+        accederButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panel.setVisible(false);
+                
+            }
+        });
+        
+        this.add(panel);
         
         //registro
         
@@ -404,6 +433,27 @@ public class Ventana extends JFrame{
             }
         });
         
+        JButton regresarButton = new JButton("Volver al Login");
+        regresarButton.setBounds(400, 300, 200, 50);
+        panelRegistro.add(regresarButton);
+
+       
+        regresarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelRegistro.setVisible(false);
+                panel.setVisible(true);
+            }
+        });
+        
+        
+        
+        this.add(panelRegistro);
+        
+        
+       
+        this.setVisible(true);
+        
         
         // PANEL DE CALCULADORA
        /* JPanel panelCalculadora = new JPanel();
@@ -527,7 +577,7 @@ public class Ventana extends JFrame{
         //this.repaint();
         
         
-        this.setVisible(true);
+        //this.setVisible(true);
         
         
 	}
