@@ -19,17 +19,19 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 
 public class Login extends JFrame {
     Font texto = new Font("Andale Mono", Font.BOLD, 22);
     Font texto2 = new Font("Andale Mono", Font.BOLD, 18);
     Font texto3 = new Font("Andale Mono", Font.BOLD, 14);
     
-    // Define all JPanels
     JPanel panelLogin = new JPanel();
     JPanel panelRegistro = new JPanel();
     JPanel panelRecuperacion = new JPanel();
@@ -51,23 +53,23 @@ public class Login extends JFrame {
         this.setLayout(null);
         this.setResizable(false);
         
-        initializePanels();
+        iniciarPanels();
         setupMenuBar();
         
         this.add(panelLogin); 
         this.setVisible(true);
     }
 
-    private void initializePanels() {
-        initializeLoginPanel();
-        initializeRegistroPanel();
-        initializeRecuperacionPanel();
-        initializeUsuariosAltaPanel();
-        initializeUsuariosBajaPanel();
-        initializeUsuariosConsultarPanel();
-        initializeAyudaCrearPanel();
-        initializeAyudaAccederPanel();
-        initializeAyudaOlvidePanel();
+    private void iniciarPanels() {
+        iniciarLoginPanel();
+        iniciarRegistroPanel();
+        iniciarRecuperacionPanel();
+        iniciarUsuariosAltaPanel();
+        iniciarUsuariosBajaPanel();
+        iniciarUsuariosConsultarPanel();
+        iniciarAyudaCrearPanel();
+        iniciarAyudaAccederPanel();
+        iniciarlizeAyudaOlvidePanel();
     }
 
     private void setupMenuBar() {
@@ -119,7 +121,7 @@ public class Login extends JFrame {
         this.setJMenuBar(barra);
     }
 
-    private JPanel initializeLoginPanel() {
+    private JPanel iniciarLoginPanel() {
         panelLogin.setLayout(null);
         panelLogin.setOpaque(false);
         panelLogin.setBounds(0, 0, 420, 600);
@@ -137,7 +139,7 @@ public class Login extends JFrame {
         JLabel usuarioLabel = new JLabel("USUARIO:");
         usuarioLabel.setBounds(50, 110, 150, 30);
         usuarioLabel.setFont(texto2);
-        usuarioLabel.setForeground(Color.WHITE);
+        usuarioLabel.setForeground(Color.BLACK);
         panelLogin.add(usuarioLabel);
 
         usuarioField = new JTextField();
@@ -152,7 +154,7 @@ public class Login extends JFrame {
 
         JLabel contraseñaLabel = new JLabel("Contraseña:");
         contraseñaLabel.setBounds(50, 180, 150, 30);
-        contraseñaLabel.setForeground(Color.WHITE);
+        contraseñaLabel.setForeground(Color.BLACK);
         contraseñaLabel.setFont(texto2);
         panelLogin.add(contraseñaLabel);
 
@@ -188,8 +190,8 @@ public class Login extends JFrame {
         return panelLogin;
     }
 
-    private JPanel initializeRegistroPanel() {
-        panelRegistro.setBounds(0, 0, 420, 600);
+    private JPanel iniciarRegistroPanel() {
+        panelRegistro.setBounds(0, 10, 420, 600);
         panelRegistro.setBackground(Color.decode("#00BFFF"));
         panelRegistro.setLayout(null);
 
@@ -290,7 +292,7 @@ public class Login extends JFrame {
         return panelRegistro;
     }
 
-    private JPanel initializeRecuperacionPanel() {
+    private JPanel iniciarRecuperacionPanel() {
         panelRecuperacion.setBounds(0, 0, 420, 600);
         panelRecuperacion.setBackground(Color.decode("#FFD700"));
         panelRecuperacion.setLayout(null);
@@ -319,94 +321,183 @@ public class Login extends JFrame {
         return panelRecuperacion;
     }
 
-    private JPanel initializeUsuariosAltaPanel() {
+    private JPanel iniciarUsuariosAltaPanel() {
         panelUsuariosAlta.setBounds(0, 0, 420, 600);
         panelUsuariosAlta.setBackground(Color.decode("#98FB98"));
         panelUsuariosAlta.setLayout(null);
 
         JLabel title = new JLabel("ALTA DE USUARIOS", SwingConstants.CENTER);
-        title.setBounds(0, 50, 420, 40);
+        title.setBounds(0, 10, 420, 40);
         title.setFont(texto);
         panelUsuariosAlta.add(title);
+        
+        JLabel buscarLabel = new JLabel("Alta:");
+        buscarLabel.setBounds(50, 80, 120, 30);
+        buscarLabel.setFont(texto3);
+        panelUsuariosAlta.add(buscarLabel);
 
-        JLabel nombreLabel = new JLabel("Nombre:");
-        nombreLabel.setBounds(50, 150, 100, 30);
-        nombreLabel.setFont(texto2);
-        panelUsuariosAlta.add(nombreLabel);
+        JTextField buscarField = new JTextField();
+        buscarField.setBounds(90, 80, 150, 30);
+        panelUsuariosAlta.add(buscarField);
 
-        JTextField nombreField = new JTextField();
-        nombreField.setBounds(150, 150, 200, 30);
-        nombreField.setFont(texto2);
-        panelUsuariosAlta.add(nombreField);
+        JButton buscarButton = new JButton("Buscar");
+        buscarButton.setBounds(250, 80, 90, 30);
+        buscarButton.setFont(texto3);
+        panelUsuariosAlta.add(buscarButton);
+        
+        JButton añadirButton = new JButton("Añadir");
+        añadirButton.setBounds(240, 120, 110, 30);
+        añadirButton.setFont(texto3);
+        panelUsuariosAlta.add(añadirButton);
 
-        JButton altaButton = new JButton("Dar de Alta");
-        altaButton.setBounds(135, 250, 150, 40);
-        altaButton.setFont(texto2);
-        altaButton.setBackground(Color.WHITE);
-        panelUsuariosAlta.add(altaButton);
+        String[] columnNames = {"Nombre", "Apellido", "Accion", "Año de nacimiento", "Morbilidad"};
+        Object[][] data = {
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false}
+        };
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        JTable table = new JTable(model);
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(50, 200, 320, 400); 
+        panelUsuariosAlta.add(scrollPane);
+
 
         return panelUsuariosAlta;
     }
 
-    private JPanel initializeUsuariosBajaPanel() {
+    private JPanel iniciarUsuariosBajaPanel() {
         panelUsuariosBaja.setBounds(0, 0, 420, 600);
         panelUsuariosBaja.setBackground(Color.decode("#FFA07A"));
         panelUsuariosBaja.setLayout(null);
 
         JLabel title = new JLabel("BAJA DE USUARIOS", SwingConstants.CENTER);
-        title.setBounds(0, 50, 420, 40);
+        title.setBounds(0, 10, 420, 40);
         title.setFont(texto);
         panelUsuariosBaja.add(title);
+        
+        JLabel buscarLabel = new JLabel("Baja:");
+        buscarLabel.setBounds(50, 80, 120, 30);
+        buscarLabel.setFont(texto3);
+        panelUsuariosBaja.add(buscarLabel);
 
-        JLabel idLabel = new JLabel("ID Usuario:");
-        idLabel.setBounds(50, 150, 100, 30);
-        idLabel.setFont(texto2);
-        panelUsuariosBaja.add(idLabel);
+        JTextField buscarField = new JTextField();
+        buscarField.setBounds(90, 80, 150, 30);
+        panelUsuariosBaja.add(buscarField);
 
-        JTextField idField = new JTextField();
-        idField.setBounds(150, 150, 200, 30);
-        idField.setFont(texto2);
-        panelUsuariosBaja.add(idField);
+        JButton buscarButton = new JButton("Buscar");
+        buscarButton.setBounds(250, 80, 90, 30);
+        buscarButton.setFont(texto3);
+        panelUsuariosBaja.add(buscarButton);
+        
+        JButton eliminarButton = new JButton("Eliminar");
+        eliminarButton.setBounds(240, 120, 110, 30);
+        eliminarButton.setFont(texto3);
+        panelUsuariosBaja.add(eliminarButton);
 
-        JButton bajaButton = new JButton("Dar de Baja");
-        bajaButton.setBounds(135, 250, 150, 40);
-        bajaButton.setFont(texto2);
-        bajaButton.setBackground(Color.WHITE);
-        panelUsuariosBaja.add(bajaButton);
-
+        String[] columnNames = {"Nombre", "Apellido", "Accion", "Año de nacimiento", "Morbilidad"};
+        Object[][] data = {
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false}
+        };
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        JTable table = new JTable(model);
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(50, 200, 320, 400); 
+        panelUsuariosBaja.add(scrollPane);
+        
         return panelUsuariosBaja;
     }
 
-    private JPanel initializeUsuariosConsultarPanel() {
+    private JPanel iniciarUsuariosConsultarPanel() {
         panelUsuariosConsultar.setBounds(0, 0, 420, 600);
         panelUsuariosConsultar.setBackground(Color.decode("#87CEEB"));
         panelUsuariosConsultar.setLayout(null);
 
         JLabel title = new JLabel("CONSULTAR USUARIOS", SwingConstants.CENTER);
-        title.setBounds(0, 50, 420, 40);
+        title.setBounds(0, 10, 420, 40);
         title.setFont(texto);
         panelUsuariosConsultar.add(title);
 
-        JLabel consultarLabel = new JLabel("ID o Nombre:");
-        consultarLabel.setBounds(50, 150, 100, 30);
+        JLabel consultarLabel = new JLabel("Consultar:");
+        consultarLabel.setBounds(50, 80, 120, 30);
         consultarLabel.setFont(texto2);
         panelUsuariosConsultar.add(consultarLabel);
+        
+        JTextField buscarField = new JTextField();
+        buscarField.setBounds(150, 80, 150, 30);
+        panelUsuariosConsultar.add(buscarField);
 
-        JTextField consultarField = new JTextField();
-        consultarField.setBounds(150, 150, 200, 30);
-        consultarField.setFont(texto2);
-        panelUsuariosConsultar.add(consultarField);
-
-        JButton consultarButton = new JButton("Consultar");
-        consultarButton.setBounds(135, 250, 150, 40);
-        consultarButton.setFont(texto2);
-        consultarButton.setBackground(Color.WHITE);
-        panelUsuariosConsultar.add(consultarButton);
-
+        JButton buscarButton = new JButton("Buscar");
+        buscarButton.setBounds(310, 80, 90, 30);
+        buscarButton.setFont(texto3);
+        panelUsuariosConsultar.add(buscarButton);
+        
+        String[] columnNames = {"Nombre", "Apellido", "Accion", "Año de nacimiento", "Morbilidad"};
+        Object[][] data = {
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false},
+            {"Lionel", "Messi", "futbol", "1987", false}
+        };
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        JTable table = new JTable(model);
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(50, 200, 320, 400); 
+        panelUsuariosConsultar.add(scrollPane);
+        
         return panelUsuariosConsultar;
     }
 
-    private JPanel initializeAyudaCrearPanel() {
+    private JPanel iniciarAyudaCrearPanel() {
         panelAyudaCrear.setBounds(0, 0, 420, 600);
         panelAyudaCrear.setBackground(Color.decode("#DDA0DD"));
         panelAyudaCrear.setLayout(null);
@@ -424,7 +515,7 @@ public class Login extends JFrame {
         return panelAyudaCrear;
     }
 
-    private JPanel initializeAyudaAccederPanel() {
+    private JPanel iniciarAyudaAccederPanel() {
         panelAyudaAcceder.setBounds(0, 0, 420, 600);
         panelAyudaAcceder.setBackground(Color.decode("#F0E68C"));
         panelAyudaAcceder.setLayout(null);
@@ -442,7 +533,7 @@ public class Login extends JFrame {
         return panelAyudaAcceder;
     }
 
-    private JPanel initializeAyudaOlvidePanel() {
+    private JPanel iniciarlizeAyudaOlvidePanel() {
         panelAyudaOlvide.setBounds(0, 0, 420, 600);
         panelAyudaOlvide.setBackground(Color.decode("#FFB6C1"));
         panelAyudaOlvide.setLayout(null);
@@ -497,8 +588,11 @@ public class Login extends JFrame {
         this.repaint();
         this.revalidate();
     }
+    
+    
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Login("Sistema de Usuarios"));
+        Login login = new Login("Sistema de Usuarios");
+        login.setVisible(true); 
     }
 }
