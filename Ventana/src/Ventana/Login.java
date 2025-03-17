@@ -589,7 +589,7 @@ public class Login extends JFrame {
         this.revalidate();
     }
     
-    //Volver a subir commit
+    //Volver a subir el commit
 
     public static void main(String[] args) {
         Login login = new Login("Sistema de Usuarios");
