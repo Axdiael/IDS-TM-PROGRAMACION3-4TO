@@ -1237,6 +1237,15 @@ public class Ventana extends JFrame{
 	            panelBotones.add(boton);
 	            panelBotones.revalidate();
 	            panelBotones.repaint();
+	            
+	            boton.addActionListener(new ActionListener() {
+	                @Override
+	                public void actionPerformed(ActionEvent e) {
+	                	
+	                	JOptionPane.showMessageDialog(null, "El color es "+ randomColor, "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+	                	
+	                }
+	            });
 	        }
 	    });
 		
