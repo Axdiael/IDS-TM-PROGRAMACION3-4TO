@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 import java.util.Set;
 
 import javax.imageio.ImageIO;
@@ -62,7 +63,7 @@ public class Ventana extends JFrame{
 		//Sobre que elemento colocare el item
 		this.setLocationRelativeTo(null);
 		
-		this.setBackground(Color.blue);
+		this.setBackground(Color.GREEN);
 		
 		ImageIcon icono = new ImageIcon("mario3.png"); 
 		this.setIconImage(icono.getImage());
@@ -75,7 +76,7 @@ public class Ventana extends JFrame{
         
 		
         //panel principal
-        JPanel panel = new JPanel();
+        /*JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setOpaque(false);
 		
@@ -239,7 +240,7 @@ public class Ventana extends JFrame{
         */
         
         
-        accederButton.addActionListener(new ActionListener() {
+        /*accederButton.addActionListener(new ActionListener() {
         	
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -274,7 +275,7 @@ public class Ventana extends JFrame{
             }
         });
         
-        accederButton.addActionListener(new ActionListener() {
+       /* accederButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panel.setVisible(false);
@@ -580,7 +581,7 @@ public class Ventana extends JFrame{
         //this.setVisible(true);
         
         
-	}
+	/*}
 	
 	/*@Override
 	public void paint (Graphics g) {
@@ -1201,8 +1202,49 @@ public class Ventana extends JFrame{
     	}catch(IOException e) {
     		e.printStackTrace();
     	}*/
-        
+	    JPanel panelBotones = new JPanel();
+	    panelBotones.setLayout(null);
+	    panelBotones.setOpaque(false);
+	    panelBotones.setBounds(0, 0, 1000, 700);
+	    panelBotones.setBackground(Color.GREEN);
+	    this.add(panelBotones);
+	
+	    JButton main_Button = new JButton("Click me");
+	    main_Button.setBounds(400, 350, 200, 50);
+	    main_Button.setFont(texto2); 
+	    
+	    panelBotones.add(main_Button);
+	
+	    main_Button.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+	    	 Random rand = new Random();
+	
+	            int anchoMax = 150 + rand.nextInt(150); 
+	            int altoMax = 30 + rand.nextInt(50); 
+	            int x = rand.nextInt(1000 - anchoMax); 
+	            int y = rand.nextInt(700 - altoMax);
+	            float r = rand.nextFloat();
+	            float g = rand.nextFloat();
+	            float b = rand.nextFloat();
+	
+	            JButton boton = new JButton("Hola");
+	            Color randomColor = new Color(r, g, b);
+	            boton.setBounds(x, y, anchoMax, altoMax);
+	            boton.setFont(texto2);
+	            boton.setBackground(new Color(r,g,b));
+	            
+	            panelBotones.add(boton);
+	            panelBotones.revalidate();
+	            panelBotones.repaint();
+	        }
+	    });
+		
+	        setVisible(true);
+		}
+		
 	}
+
 	
    
 
