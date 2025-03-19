@@ -1238,12 +1238,20 @@ public class Ventana extends JFrame{
 	            panelBotones.revalidate();
 	            panelBotones.repaint();
 	            
+	         
 	            boton.addActionListener(new ActionListener() {
-	                @Override
+	            	@Override
 	                public void actionPerformed(ActionEvent e) {
 	                	
 	                	JOptionPane.showMessageDialog(null, "El color es "+ randomColor, "Mensaje", JOptionPane.INFORMATION_MESSAGE);
 	                	
+	                	int respuesta = JOptionPane.showConfirmDialog(null, "¿Quieres eliminar el boton?", "WARNING", JOptionPane.YES_NO_OPTION);
+	                    
+	                	if (respuesta == JOptionPane.YES_OPTION) {
+	                        panelBotones.remove(boton);
+	                        panelBotones.revalidate();  
+	                        panelBotones.repaint();     
+	                    }
 	                }
 	            });
 	        }
