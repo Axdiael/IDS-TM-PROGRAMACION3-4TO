@@ -1202,7 +1202,10 @@ public class Ventana extends JFrame{
     	}catch(IOException e) {
     		e.printStackTrace();
     	}*/
-	    JPanel panelBotones = new JPanel();
+	    
+		//Botones emergentes eliminables
+		
+		JPanel panelBotones = new JPanel();
 	    panelBotones.setLayout(null);
 	    panelBotones.setOpaque(false);
 	    panelBotones.setBounds(0, 0, 1000, 700);
