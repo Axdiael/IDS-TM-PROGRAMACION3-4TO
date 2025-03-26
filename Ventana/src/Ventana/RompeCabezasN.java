@@ -9,9 +9,12 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+import javax.swing.Timer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -41,11 +44,17 @@ public class RompeCabezasN extends JFrame {
 	JButton btnNewButton_15;
 	JButton btnNewButton_16;
 	
-	//private JButton[] buttons; 
     private int espacio;
 	private ArrayList<JButton> buttons = new ArrayList<JButton>();
-	
-
+	private JButton btnNewButton_17;
+	private JButton btnNewButton_18;
+	private JButton btnNewButton_19;
+	private JLabel tiempoLabel;
+    private Timer tiempo;
+    private int segundos = 0;
+    private boolean pausa = true;
+    private ArrayList<String>estadoInicial;
+    private JLabel lblNewLabel;
 
 	/**
 	 * Launch the application.
@@ -68,87 +77,122 @@ public class RompeCabezasN extends JFrame {
 	 */
 	public RompeCabezasN() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 587, 600);
+		setBounds(100, 100, 817, 600);
+		
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.decode("#ca9fdd"));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		panel = new JPanel();
-		panel.setBackground(Color.decode("#f7f0ba"));
-		panel.setBounds(0, 0, 587, 520);
+		panel.setBackground(Color.decode("#ca9fdd"));
+		panel.setBounds(10, 22, 587, 520);
 		contentPane.add(panel);
 		panel.setLayout(new GridLayout(4, 4, 6, 6));
 		
 		btnNewButton = new JButton("");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton.setForeground(Color.decode("#ca9fdd"));
+		btnNewButton.setBackground(new Color(255, 255, 255));
+		btnNewButton.setFont(new Font("Serif", Font.PLAIN, 24));
 		panel.add(btnNewButton);
 		
 		btnNewButton_1 = new JButton("1");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton_1.setForeground(Color.decode("#ca9fdd"));
+		btnNewButton_1.setBackground(new Color(255, 255, 255));
+		btnNewButton_1.setFont(new Font("Serif", Font.PLAIN, 24));
 		panel.add(btnNewButton_1);
 		
 		btnNewButton_2 = new JButton("2");
-		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton_2.setForeground(Color.decode("#ca9fdd"));
+		btnNewButton_2.setBackground(new Color(255, 255, 255));
+		btnNewButton_2.setFont(new Font("Serif", Font.PLAIN, 24));
 		panel.add(btnNewButton_2);
 		
 		btnNewButton_3 = new JButton("3");
-		btnNewButton_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton_3.setForeground(Color.decode("#ca9fdd"));
+		btnNewButton_3.setBackground(new Color(255, 255, 255));
+		btnNewButton_3.setFont(new Font("Serif", Font.PLAIN, 24));
 		panel.add(btnNewButton_3);
 		
 		btnNewButton_4 = new JButton("4");
-		btnNewButton_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton_4.setForeground(Color.decode("#ca9fdd"));
+		btnNewButton_4.setBackground(new Color(255, 255, 255));
+		btnNewButton_4.setFont(new Font("Serif", Font.PLAIN, 24));
 		panel.add(btnNewButton_4);
 		
 		btnNewButton_5 = new JButton("5");
-		btnNewButton_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton_5.setForeground(Color.decode("#ca9fdd"));
+		btnNewButton_5.setBackground(new Color(255, 255, 255));
+		btnNewButton_5.setFont(new Font("Serif", Font.PLAIN, 24));
 		panel.add(btnNewButton_5);
 		
 		btnNewButton_6 = new JButton("6");
-		btnNewButton_6.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton_6.setForeground(Color.decode("#ca9fdd"));
+		btnNewButton_6.setBackground(new Color(255, 255, 255));
+		btnNewButton_6.setFont(new Font("Serif", Font.PLAIN, 24));
 		panel.add(btnNewButton_6);
 		
 		btnNewButton_7 = new JButton("7");
-		btnNewButton_7.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton_7.setForeground(Color.decode("#ca9fdd"));
+		btnNewButton_7.setBackground(new Color(255, 255, 255));
+		btnNewButton_7.setFont(new Font("Serif", Font.PLAIN, 24));
 		panel.add(btnNewButton_7);
 		
 		btnNewButton_8 = new JButton("8");
-		btnNewButton_8.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton_8.setForeground(Color.decode("#ca9fdd"));
+		btnNewButton_8.setBackground(new Color(255, 255, 255));
+		btnNewButton_8.setFont(new Font("Serif", Font.PLAIN, 24));
 		panel.add(btnNewButton_8);
 		
 		btnNewButton_9 = new JButton("9");
-		btnNewButton_9.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton_9.setForeground(Color.decode("#ca9fdd"));
+		btnNewButton_9.setBackground(new Color(255, 255, 255));
+		btnNewButton_9.setFont(new Font("Serif", Font.PLAIN, 24));
 		panel.add(btnNewButton_9);
 		
 		btnNewButton_10 = new JButton("10");
-		btnNewButton_10.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton_10.setForeground(Color.decode("#ca9fdd"));
+		btnNewButton_10.setBackground(new Color(255, 255, 255));
+		btnNewButton_10.setFont(new Font("Serif", Font.PLAIN, 24));
 		panel.add(btnNewButton_10);
 		
 		btnNewButton_11 = new JButton("11");
-		btnNewButton_11.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton_11.setForeground(Color.decode("#ca9fdd"));
+		btnNewButton_11.setBackground(new Color(255, 255, 255));
+		btnNewButton_11.setFont(new Font("Serif", Font.PLAIN, 24));
 		panel.add(btnNewButton_11);
 		
 		btnNewButton_12 = new JButton("12");
-		btnNewButton_12.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton_12.setForeground(Color.decode("#ca9fdd"));
+		btnNewButton_12.setBackground(new Color(255, 255, 255));
+		btnNewButton_12.setFont(new Font("Serif", Font.PLAIN, 24));
 		panel.add(btnNewButton_12);
 		
 		btnNewButton_13 = new JButton("13");
-		btnNewButton_13.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton_13.setForeground(Color.decode("#ca9fdd"));
+		btnNewButton_13.setBackground(new Color(255, 255, 255));
+		btnNewButton_13.setFont(new Font("Serif", Font.PLAIN, 24));
 		panel.add(btnNewButton_13);
 		
 		btnNewButton_14 = new JButton("14");
-		btnNewButton_14.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton_14.setForeground(Color.decode("#ca9fdd"));
+		btnNewButton_14.setBackground(new Color(255, 255, 255));
+		btnNewButton_14.setFont(new Font("Serif", Font.PLAIN, 24));
 		panel.add(btnNewButton_14);
 		
 		btnNewButton_15 = new JButton("15");
-		btnNewButton_15.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton_15.setForeground(Color.decode("#ca9fdd"));
+		btnNewButton_15.setBackground(new Color(255, 255, 255));
+		btnNewButton_15.setFont(new Font("Serif", Font.PLAIN, 24));
 		panel.add(btnNewButton_15);
 		
 		btnNewButton_16 = new JButton("Nuevo Tablero");
-		btnNewButton_16.setBackground(Color.decode("#ffffc4"));
-		btnNewButton_16.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnNewButton_16.setBounds(0, 519, 573, 44);
+		btnNewButton_16.setForeground(Color.decode("#ca9fdd"));
+		btnNewButton_16.setBackground(new Color(255, 255, 255));
+		btnNewButton_16.setFont(new Font("Serif", Font.PLAIN, 20));
+		btnNewButton_16.setBounds(607, 402, 192, 44);
 		contentPane.add(btnNewButton_16);
 		
 		buttons = new ArrayList<>();
@@ -169,10 +213,73 @@ public class RompeCabezasN extends JFrame {
         buttons.add(btnNewButton_14);
         buttons.add(btnNewButton_15);
         
+        btnNewButton_19 = new JButton("Reiniciar Tablero");
+        btnNewButton_19.setForeground(Color.decode("#ca9fdd"));
+        btnNewButton_19.setBackground(new Color(255, 255, 255));
+        btnNewButton_19.setFont(new Font("Serif", Font.PLAIN, 18));
+        btnNewButton_19.setBounds(624, 341, 167, 35);
+        contentPane.add(btnNewButton_19);
+        
+        btnNewButton_17 = new JButton("Pausar");
+        btnNewButton_17.setForeground(Color.decode("#ca9fdd"));
+        btnNewButton_17.setBackground(new Color(255, 255, 255));
+        btnNewButton_17.setFont(new Font("Serif", Font.PLAIN, 18));
+        btnNewButton_17.setBounds(624, 296, 167, 35);
+        contentPane.add(btnNewButton_17);
+        
+        btnNewButton_18 = new JButton("Reanudar");
+        btnNewButton_18.setForeground(Color.decode("#ca9fdd"));
+        btnNewButton_18.setBackground(new Color(255, 255, 255));
+        btnNewButton_18.setFont(new Font("Serif", Font.PLAIN, 18));
+        btnNewButton_18.setBounds(624, 245, 167, 35);
+        contentPane.add(btnNewButton_18);
+        
+        tiempoLabel = new JLabel("Tiempo: 0s");
+        tiempoLabel.setForeground(new Color(255, 255, 255));
+        tiempoLabel.setFont(new Font("Serif", Font.BOLD, 28));
+        tiempoLabel.setBounds(624, 145, 179, 35);
+        contentPane.add(tiempoLabel);
+        
+        lblNewLabel = new JLabel("PUZZLE");
+        lblNewLabel.setForeground(new Color(255, 255, 255));
+        lblNewLabel.setFont(new Font("Serif", Font.BOLD, 35));
+        lblNewLabel.setBounds(624, 22, 153, 54);
+        contentPane.add(lblNewLabel);
+        
+        tiempo = new Timer(1000, e -> {
+            segundos++;
+            tiempoLabel.setText("Tiempo: " + segundos + "s");
+        });
+        
+        for (JButton btn : buttons) {
+            btn.setEnabled(false);
+        }
+       
 		CambiarBotones();
 		agregarListeners();
+		ganador();
 		
 	}
+	
+	private void ganador() {
+        String[] validarGanar = {"1", "2", "3", "4", "5", "6", "7", "8", 
+                               "9", "10", "11", "12", "13", "14", "15", ""};
+        boolean ganar = true;
+        for (int i = 0; i < 16; i++) {
+            if (!buttons.get(i).getText().equals(validarGanar[i])) {
+                ganar = false;
+                break;
+            }
+        }
+        if (ganar) {
+            tiempo.stop();
+            JOptionPane.showMessageDialog(this, "Ganaste en " + segundos + " segundos");
+            pausa = true;
+            for (JButton btn : buttons) {
+                btn.setEnabled(false);
+            }
+        }
+    }
 	private void CambiarBotones() {
 		
 		ArrayList<String> numbers = new ArrayList<>();
@@ -189,6 +296,13 @@ public class RompeCabezasN extends JFrame {
                 espacio = i;
             }
         }
+        estadoInicial = new ArrayList<>(numbers);
+        
+        segundos = 0;
+        tiempoLabel.setText("Tiempo: 0s");
+        tiempo.stop();
+        pausa = true;
+        
     }
 	
     
@@ -391,7 +505,66 @@ public class RompeCabezasN extends JFrame {
                 CambiarBotones(); 
             }
         });
+        
+        btnNewButton_17.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!pausa) {
+                    tiempo.stop();
+                    pausa = true;
+                    for (JButton btn : buttons) {
+                        btn.setEnabled(false);
+                    }
+                } else {
+                    tiempo.start();
+                    pausa = false;
+                    for (JButton btn : buttons) {
+                        btn.setEnabled(true);
+                    }
+                }
+            }
+        });
+        
+        btnNewButton_18.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (pausa) {
+                    tiempo.start();
+                    pausa = false;
+                    btnNewButton_17.setEnabled(true);
+                    for (JButton btn : buttons) {
+                        btn.setEnabled(true);
+                    }
+                }
+            }
+        });
+        
+        btnNewButton_19.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                reiniciarTablero();
+            }
+        });
+    
     }
+    
+    private void reiniciarTablero() {
+        for (int i = 0; i < 16; i++) {
+            buttons.get(i).setText(estadoInicial.get(i));
+            if (estadoInicial.get(i).equals("")) {
+                espacio = i;
+            }
+        }
+        
+        segundos = 0;
+        tiempoLabel.setText("Tiempo: 0s");
+        tiempo.stop();
+        pausa = true;
+        for (JButton btn : buttons) {
+            btn.setEnabled(false);
+        }
+    }
+    
     private boolean validarEspacios(int index1, int index2) {
         int row1 = index1 / 4;
         int col1 = index1 % 4;
