@@ -1,18 +1,30 @@
 package Ventana;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.JButton;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.Icon;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JSlider;
 import javax.swing.JRadioButton;
@@ -21,6 +33,26 @@ public class Paint extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	
+	private int gruesoSlider=1;
+	private Color color= Color.BLACK;
+	
+	private PaintPanel Panel_1;
+    private ArrayList<linea> puntos = new ArrayList<>();
+    private List<List<linea>> listaDePuntos = new ArrayList<>();
+    private boolean isBrushSelected = false;
+     
+    class linea {
+        Point point;
+        Color color;
+        float strokeWidth;
+
+        linea(Point point, Color color, float strokeWidth) {
+            this.point = point;
+            this.color = color;
+            this.strokeWidth = strokeWidth;
+        }
+    }
 
 	/**
 	 * Launch the application.
@@ -37,6 +69,40 @@ public class Paint extends JFrame {
 			}
 		});
 	}
+	
+	class PaintPanel extends JPanel {
+		public PaintPanel() {
+            this.setBackground(Color.WHITE);
+        }
+
+        @Override
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            Graphics2D g2 = (Graphics2D) g;
+
+            if (puntos.size() > 1) {
+                for (int i = 1; i < puntos.size(); i++) {
+                    g2.setColor(puntos.get(i).color);
+                    g2.setStroke(new BasicStroke(puntos.get(i).strokeWidth));
+                    Point p1 = puntos.get(i - 1).point;
+                    Point p2 = puntos.get(i).point;
+                    g2.drawLine(p1.x, p1.y, p2.x, p2.y);
+                }
+            }
+            
+            for (List<linea> trazo : listaDePuntos) {
+                if (trazo.size() > 1) {
+                    for (int i = 1; i < trazo.size(); i++) {
+                        g2.setColor(trazo.get(i).color);
+                        g2.setStroke(new BasicStroke(trazo.get(i).strokeWidth));
+                        Point p1 = trazo.get(i - 1).point;
+                        Point p2 = trazo.get(i).point;
+                        g2.drawLine(p1.x, p1.y, p2.x, p2.y);
+                    }
+                }
+            }
+        }
+    }
 
 	/**
 	 * Create the frame.
@@ -108,6 +174,11 @@ public class Paint extends JFrame {
 		btnNewButton_2.setForeground(Color.BLACK);
 		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnNewButton_2.setBackground(Color.WHITE);
+		btnNewButton_2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                isBrushSelected = true;
+            }
+        });
 		btnNewButton_2.setBounds(25, 212, 131, 23);
 		panel.add(btnNewButton_2);
 		
@@ -134,7 +205,14 @@ public class Paint extends JFrame {
 		JButton btnNewButton_4 = new JButton("Clean");
 		btnNewButton_4.setBackground(new Color(255, 255, 255));
 		btnNewButton_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnNewButton_4.setBounds(25, 440, 121, 21);
+		btnNewButton_4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                listaDePuntos.clear();
+                puntos.clear();
+                Panel_1.repaint();
+            }
+        });
+		btnNewButton_4.setBounds(25, 452, 121, 21);
 		panel.add(btnNewButton_4);
 		
 		JButton btnNewButton_5 = new JButton("Save");
@@ -144,7 +222,7 @@ public class Paint extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_5.setBounds(25, 471, 121, 21);
+		btnNewButton_5.setBounds(25, 484, 121, 21);
 		panel.add(btnNewButton_5);
 		
 		JLabel lblColors = new JLabel("Colors");
@@ -152,68 +230,150 @@ public class Paint extends JFrame {
 		lblColors.setBounds(25, 356, 87, 23);
 		panel.add(lblColors);
 		
-		JSlider slider = new JSlider();
-		slider.setBounds(25, 333, 131, 13);
-		panel.add(slider);
+		JSlider grueso = new JSlider();
+		grueso.setValue(1);
+		grueso.setMaximum(10);
+		grueso.setBounds(25, 336, 131, 20);
+		grueso.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                gruesoSlider = grueso.getValue();
+            }
+        });
+		panel.add(grueso);
+		
 		
 		JLabel lblNewLabel_1 = new JLabel("Thickness");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_1.setBounds(59, 311, 65, 21);
 		panel.add(lblNewLabel_1);
 		
-		ButtonGroup colorGroup = new ButtonGroup();
+		JButton btnNewButton_6 = new JButton();
+		btnNewButton_6.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                color = Color.BLUE;
+            }
+        });
+		btnNewButton_6.setBackground(new Color(255, 255, 255));
+		btnNewButton_6.setBounds(25, 389, 21, 21);
+		panel.add(btnNewButton_6);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("New radio button");
-		rdbtnNewRadioButton.setBackground(new Color(255, 255, 255));
-		rdbtnNewRadioButton.setBounds(24, 385, 21, 21);
-		colorGroup.add(rdbtnNewRadioButton);
-		panel.add(rdbtnNewRadioButton);
+		JButton btnNewButton_6_1 = new JButton("");
+		btnNewButton_6_1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                color = Color.BLACK;
+            }
+        });
+		btnNewButton_6_1.setBackground(new Color(0, 0, 0));
+		btnNewButton_6_1.setBounds(59, 389, 21, 21);
+		panel.add(btnNewButton_6_1);
 		
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("New radio button");
-		rdbtnNewRadioButton_1.setBackground(new Color(0, 0, 0));
-		rdbtnNewRadioButton_1.setBounds(59, 385, 21, 21);
-		colorGroup.add(rdbtnNewRadioButton_1);
-		panel.add(rdbtnNewRadioButton_1);
+		JButton btnNewButton_6_2 = new JButton("");
+		btnNewButton_6_2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                color = Color.RED;
+            }
+        });
+		btnNewButton_6_2.setBackground(new Color(255, 0, 0));
+		btnNewButton_6_2.setBounds(91, 389, 21, 21);
+		panel.add(btnNewButton_6_2);
 		
-		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("New radio button");
-		rdbtnNewRadioButton_2.setBackground(new Color(192, 192, 192));
-		rdbtnNewRadioButton_2.setBounds(91, 385, 21, 21);
-		colorGroup.add(rdbtnNewRadioButton_2);
-		panel.add(rdbtnNewRadioButton_2);
+		JButton btnNewButton_6_3 = new JButton("");
+		btnNewButton_6_3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                color = new Color(128, 255, 128);
+                isBrushSelected = true;
+            }
+        });
+		btnNewButton_6_3.setBackground(new Color(128, 255, 128));
+		btnNewButton_6_3.setBounds(122, 389, 21, 21);
+		panel.add(btnNewButton_6_3);
 		
-		JRadioButton rdbtnNewRadioButton_3 = new JRadioButton("New radio button");
-		rdbtnNewRadioButton_3.setBackground(new Color(128, 255, 255));
-		rdbtnNewRadioButton_3.setBounds(125, 385, 21, 21);
-		colorGroup.add(rdbtnNewRadioButton_3);
-		panel.add(rdbtnNewRadioButton_3);
+		JButton btnNewButton_6_4 = new JButton("");
+		btnNewButton_6_4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                color = new Color(128, 255, 255);
+                isBrushSelected = true;
+            }
+        });
+		btnNewButton_6_4.setBackground(new Color(128, 255, 255));
+		btnNewButton_6_4.setBounds(25, 421, 21, 21);
 		
-		JRadioButton rdbtnNewRadioButton_4 = new JRadioButton("New radio button");
-		rdbtnNewRadioButton_4.setBackground(new Color(255, 0, 0));
-		rdbtnNewRadioButton_4.setBounds(25, 408, 21, 21);
-		colorGroup.add(rdbtnNewRadioButton_4);
-		panel.add(rdbtnNewRadioButton_4);
+		panel.add(btnNewButton_6_4);
 		
-		JRadioButton rdbtnNewRadioButton_5 = new JRadioButton("New radio button");
-		rdbtnNewRadioButton_5.setBackground(new Color(128, 255, 128));
-		rdbtnNewRadioButton_5.setBounds(59, 408, 21, 21);
-		colorGroup.add(rdbtnNewRadioButton_5);
-		panel.add(rdbtnNewRadioButton_5);
+		JButton btnNewButton_6_5 = new JButton("");
+		btnNewButton_6_5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                color = new Color(192, 192, 192);
+            }
+        });
+		btnNewButton_6_5.setBackground(new Color(192, 192, 192));
+		btnNewButton_6_5.setBounds(60, 421, 21, 21);
+		panel.add(btnNewButton_6_5);
 		
-		JRadioButton rdbtnNewRadioButton_6 = new JRadioButton("New radio button");
-		rdbtnNewRadioButton_6.setBackground(new Color(255, 255, 128));
-		rdbtnNewRadioButton_6.setBounds(91, 408, 21, 21);
-		colorGroup.add(rdbtnNewRadioButton_6);
-		panel.add(rdbtnNewRadioButton_6);
+		JButton btnNewButton_6_6 = new JButton("");
+		btnNewButton_6_6.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                color = new Color(255, 255, 128);
+            }
+        });
+		btnNewButton_6_6.setBackground(new Color(255, 255, 128));
+		btnNewButton_6_6.setBounds(91, 421, 21, 21);
+		panel.add(btnNewButton_6_6);
 		
-		JRadioButton rdbtnNewRadioButton_7 = new JRadioButton("New radio button");
-		rdbtnNewRadioButton_7.setBackground(new Color(128, 0, 255));
-		rdbtnNewRadioButton_7.setBounds(125, 408, 21, 21);
-		colorGroup.add(rdbtnNewRadioButton_7);
-		panel.add(rdbtnNewRadioButton_7);
+		JButton btnNewButton_6_7 = new JButton("");
+		btnNewButton_6_7.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                color = new Color(255, 128, 255);
+            }
+        });
+		btnNewButton_6_7.setBackground(new Color(255, 128, 255));
+		btnNewButton_6_7.setBounds(122, 421, 21, 21);
+		panel.add(btnNewButton_6_7);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(255, 255, 255));
-		panel_1.setBounds(238, 39, 660, 536);
-		contentPane.add(panel_1);
-	}
+		Panel_1 = new PaintPanel();
+        Panel_1.setBounds(238, 39, 660, 536);
+        Panel_1.addMouseListener(new MouseListener() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (isBrushSelected) {
+                    puntos.clear();
+                    puntos.add(new linea(e.getPoint(), color, gruesoSlider));
+                }
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if (isBrushSelected && !puntos.isEmpty()) {
+                    ArrayList<linea> trazo = new ArrayList<>(puntos);
+                    listaDePuntos.add(trazo);
+                    puntos.clear();
+                    Panel_1.repaint();
+                }
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {}
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+            @Override
+            public void mouseExited(MouseEvent e) {}
+        });
+
+        Panel_1.addMouseMotionListener(new MouseMotionListener() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                if (isBrushSelected) {
+                    puntos.add(new linea(e.getPoint(), color, gruesoSlider));
+                    Panel_1.repaint();
+                }
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {}
+        });
+        contentPane.add(Panel_1);
+    }
+	
+
 }
