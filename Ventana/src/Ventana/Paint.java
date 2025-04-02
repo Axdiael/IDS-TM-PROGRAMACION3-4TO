@@ -38,10 +38,14 @@ public class Paint extends JFrame {
 	private Color color= Color.BLACK;
 	
 	private PaintPanel Panel_1;
+	private ArrayList<figura> figuras = new ArrayList<>();
     private ArrayList<linea> puntos = new ArrayList<>();
     private List<List<linea>> listaDePuntos = new ArrayList<>();
     private boolean isBrushSelected = false;
-     
+    private int tool= 0; 
+    private Point primerPunto;
+    private boolean segundoClick;
+    
     class linea {
         Point point;
         Color color;
@@ -51,6 +55,23 @@ public class Paint extends JFrame {
             this.point = point;
             this.color = color;
             this.strokeWidth = strokeWidth;
+        }
+    }
+    class figura {
+        public int x, y, w, h;
+        public Color color;
+        public int tipo;
+        public float strokeWidth;
+        
+        public figura( int x, int y, int w, int h, Color color, int tipo, float strokeWidth) {
+        	this.x=x;
+        	this.y=y;
+        	this.w=w;
+        	this.h=h;
+        	this.color= color;
+        	this.tipo=tipo;
+        	this.strokeWidth=strokeWidth;
+        
         }
     }
 
@@ -101,8 +122,27 @@ public class Paint extends JFrame {
                     }
                 }
             }
+            
+            for (figura f : figuras) {
+                g2.setColor(f.color);
+                g2.setStroke(new BasicStroke(f.strokeWidth));
+                if (f.tipo == 1) {
+                    g2.drawRect(f.x, f.y, f.w, f.h);
+                } else if (f.tipo == 2) {
+                    g2.drawOval(f.x, f.y, f.w, f.h);
+                }else if (f.tipo==3) {
+                	int[] xPoints = {f.x + f.w / 2, f.x, f.x + f.w};
+                    int[] yPoints = {f.y, f.y + f.h, f.y + f.h};
+                    g2.drawPolygon(xPoints, yPoints, 3);
+                }else if (f.tipo == 4) {
+                    
+                    g2.drawLine(f.x, f.y, f.x + f.w, f.y + f.h);
+                }
+            }
         }
     }
+	
+	
 
 	/**
 	 * Create the frame.
@@ -128,6 +168,15 @@ public class Paint extends JFrame {
 		btnNewButton.setIcon(new ImageIcon("C:\\Users\\axdie\\git\\IDS-TM-PROGRAMACION3-4TO\\Ventana\\src\\Ventana\\cuadrado (1).png"));
 		btnNewButton.setBackground(new Color(255, 255, 255));
 		btnNewButton.setForeground(new Color(0, 0, 0));
+		btnNewButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                tool= 1;
+                
+                isBrushSelected = false;
+		        segundoClick = false; 
+		        primerPunto = null;
+            }
+        });
 		btnNewButton.setBounds(25, 48, 131, 23);
 		panel.add(btnNewButton);
 		
@@ -136,6 +185,15 @@ public class Paint extends JFrame {
 		btnCircle.setForeground(Color.BLACK);
 		btnCircle.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnCircle.setBackground(Color.WHITE);
+		btnCircle.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                tool=2;
+                
+                isBrushSelected = false;
+		        segundoClick = false; 
+		        primerPunto = null;
+            }
+        });
 		btnCircle.setBounds(25, 80, 131, 23);
 		panel.add(btnCircle);
 		
@@ -144,6 +202,15 @@ public class Paint extends JFrame {
 		btnTriangle.setForeground(Color.BLACK);
 		btnTriangle.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnTriangle.setBackground(Color.WHITE);
+		btnTriangle.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                tool=3;
+                
+                isBrushSelected = false;
+		        segundoClick = false; 
+		        primerPunto = null;
+            }
+        });
 		btnTriangle.setBounds(25, 113, 121, 23);
 		panel.add(btnTriangle);
 		
@@ -190,17 +257,22 @@ public class Paint extends JFrame {
 		btnNewButton_3.setBounds(25, 245, 131, 23);
 		panel.add(btnNewButton_3);
 		
-		JButton btnTriangle_1 = new JButton(" Line    ");
-		btnTriangle_1.addActionListener(new ActionListener() {
+		JButton btnLine = new JButton(" Line    ");
+		btnLine.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				tool=4;
+				
+				isBrushSelected = false;
+		        segundoClick = false; 
+		        primerPunto = null;
 			}
 		});
-		btnTriangle_1.setIcon(new ImageIcon("C:\\Users\\axdie\\git\\IDS-TM-PROGRAMACION3-4TO\\Ventana\\src\\Ventana\\linea (1).png"));
-		btnTriangle_1.setForeground(Color.BLACK);
-		btnTriangle_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnTriangle_1.setBackground(Color.WHITE);
-		btnTriangle_1.setBounds(25, 146, 121, 23);
-		panel.add(btnTriangle_1);
+		btnLine.setIcon(new ImageIcon("C:\\Users\\axdie\\git\\IDS-TM-PROGRAMACION3-4TO\\Ventana\\src\\Ventana\\linea (1).png"));
+		btnLine.setForeground(Color.BLACK);
+		btnLine.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnLine.setBackground(Color.WHITE);
+		btnLine.setBounds(25, 146, 121, 23);
+		panel.add(btnLine);
 		
 		JButton btnNewButton_4 = new JButton("Clean");
 		btnNewButton_4.setBackground(new Color(255, 255, 255));
@@ -209,6 +281,9 @@ public class Paint extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 listaDePuntos.clear();
                 puntos.clear();
+                figuras.clear();
+                primerPunto=null;
+                segundoClick=false;
                 Panel_1.repaint();
             }
         });
@@ -251,7 +326,7 @@ public class Paint extends JFrame {
 		JButton btnNewButton_6 = new JButton();
 		btnNewButton_6.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                color = Color.BLUE;
+                color = Color.WHITE;
             }
         });
 		btnNewButton_6.setBackground(new Color(255, 255, 255));
@@ -353,7 +428,33 @@ public class Paint extends JFrame {
             }
 
             @Override
-            public void mouseClicked(MouseEvent e) {}
+            public void mouseClicked(MouseEvent e) {
+            	
+                if (tool == 1) { 
+                	figuras.add(new figura(e.getX()-40, e.getY()-40, 80, 80, color, 1, gruesoSlider));
+                } else if (tool == 2) { 
+                	figuras.add(new figura(e.getX()-40, e.getY()-40, 80, 80, color, 2, gruesoSlider));
+                }else if (tool==3) {
+                	figuras.add(new figura(e.getX()-40, e.getY()-40, 80, 80, color, 3,gruesoSlider));
+                }else if (tool == 4) {
+                    if (!segundoClick) {
+                       
+                        primerPunto = e.getPoint();
+                        segundoClick = true;
+                    } else {
+                        
+                        int dx = e.getX() - primerPunto.x;
+                        int dy = e.getY() - primerPunto.y;
+                        figuras.add(new figura(primerPunto.x, primerPunto.y, dx, dy, color, 4,gruesoSlider));
+                        segundoClick = false;
+                        primerPunto = null;
+                        
+                    }
+                
+                }
+                Panel_1.repaint();
+            }
+            
             @Override
             public void mouseEntered(MouseEvent e) {}
             @Override
