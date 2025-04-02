@@ -137,6 +137,8 @@ public class Paint extends JFrame {
                 }else if (f.tipo == 4) {
                     
                     g2.drawLine(f.x, f.y, f.x + f.w, f.y + f.h);
+                }else if (f.tipo ==5) {
+                	g2.clearRect(f.x, f.y, f.w, f.h);
                 }
             }
         }
@@ -254,6 +256,14 @@ public class Paint extends JFrame {
 		btnNewButton_3.setForeground(Color.BLACK);
 		btnNewButton_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnNewButton_3.setBackground(Color.WHITE);
+		btnNewButton_3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                tool=5;
+                isBrushSelected = false;
+		        segundoClick = false; 
+		        primerPunto = null;
+            }
+        });
 		btnNewButton_3.setBounds(25, 245, 131, 23);
 		panel.add(btnNewButton_3);
 		
@@ -467,6 +477,9 @@ public class Paint extends JFrame {
                 if (isBrushSelected) {
                     puntos.add(new linea(e.getPoint(), color, gruesoSlider));
                     Panel_1.repaint();
+                }else  if(tool==5) {
+                	figuras.add(new figura(e.getX()-40, e.getY()-40, 80, 80, Color.WHITE, 5, 10));
+                	Panel_1.repaint();
                 }
             }
 
