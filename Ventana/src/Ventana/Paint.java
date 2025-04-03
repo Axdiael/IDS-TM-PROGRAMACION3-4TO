@@ -28,6 +28,7 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JSlider;
 import javax.swing.JRadioButton;
+import javax.swing.JCheckBox;
 
 public class Paint extends JFrame {
 
@@ -36,6 +37,8 @@ public class Paint extends JFrame {
 	
 	private int gruesoSlider=1;
 	private Color color= Color.BLACK;
+	private int fSize = 80;
+	private JLabel lblNewLabel_3;
 	
 	private PaintPanel Panel_1;
 	private ArrayList<figura> figuras = new ArrayList<>();
@@ -45,16 +48,19 @@ public class Paint extends JFrame {
     private int tool= 0; 
     private Point primerPunto;
     private boolean segundoClick;
+    private JCheckBox fillRect;
     
     class linea {
         Point point;
         Color color;
         float strokeWidth;
+        
 
         linea(Point point, Color color, float strokeWidth) {
             this.point = point;
             this.color = color;
             this.strokeWidth = strokeWidth;
+            
         }
     }
     class figura {
@@ -62,8 +68,9 @@ public class Paint extends JFrame {
         public Color color;
         public int tipo;
         public float strokeWidth;
+        public boolean rellenar;
         
-        public figura( int x, int y, int w, int h, Color color, int tipo, float strokeWidth) {
+        public figura( int x, int y, int w, int h, Color color, int tipo, float strokeWidth, boolean rellenar ) {
         	this.x=x;
         	this.y=y;
         	this.w=w;
@@ -71,6 +78,7 @@ public class Paint extends JFrame {
         	this.color= color;
         	this.tipo=tipo;
         	this.strokeWidth=strokeWidth;
+        	this.rellenar=rellenar;
         
         }
     }
@@ -127,13 +135,29 @@ public class Paint extends JFrame {
                 g2.setColor(f.color);
                 g2.setStroke(new BasicStroke(f.strokeWidth));
                 if (f.tipo == 1) {
-                    g2.drawRect(f.x, f.y, f.w, f.h);
+                	if (f.rellenar) {
+                        g2.fillRect(f.x, f.y, f.w, f.h); 
+                    } else {
+                        g2.drawRect(f.x, f.y, f.w, f.h); 
+                    }
                 } else if (f.tipo == 2) {
-                    g2.drawOval(f.x, f.y, f.w, f.h);
+                	if (f.rellenar) {
+                        g2.fillOval(f.x, f.y, f.w, f.h); 
+                    } else {
+                        g2.drawOval(f.x, f.y, f.w, f.h); 
+                    }
                 }else if (f.tipo==3) {
-                	int[] xPoints = {f.x + f.w / 2, f.x, f.x + f.w};
-                    int[] yPoints = {f.y, f.y + f.h, f.y + f.h};
-                    g2.drawPolygon(xPoints, yPoints, 3);
+                	
+                	if (f.rellenar) {
+                		int[] xPoints = {f.x + f.w / 2, f.x, f.x + f.w};
+                        int[] yPoints = {f.y, f.y + f.h, f.y + f.h};
+                        g2.fillPolygon(xPoints, yPoints, 3);
+                    } else {
+                    	int[] xPoints = {f.x + f.w / 2, f.x, f.x + f.w};
+                        int[] yPoints = {f.y, f.y + f.h, f.y + f.h};
+                        g2.drawPolygon(xPoints, yPoints, 3);
+                    }
+                	
                 }else if (f.tipo == 4) {
                     
                     g2.drawLine(f.x, f.y, f.x + f.w, f.y + f.h);
@@ -161,7 +185,7 @@ public class Paint extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
-		panel.setBounds(36, 39, 178, 536);
+		panel.setBounds(10, 39, 215, 536);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -179,7 +203,7 @@ public class Paint extends JFrame {
 		        primerPunto = null;
             }
         });
-		btnNewButton.setBounds(25, 48, 131, 23);
+		btnNewButton.setBounds(3, 48, 131, 23);
 		panel.add(btnNewButton);
 		
 		JButton btnCircle = new JButton("Circle      ");
@@ -196,7 +220,7 @@ public class Paint extends JFrame {
 		        primerPunto = null;
             }
         });
-		btnCircle.setBounds(25, 80, 131, 23);
+		btnCircle.setBounds(3, 81, 131, 23);
 		panel.add(btnCircle);
 		
 		JButton btnTriangle = new JButton("Triangle");
@@ -213,7 +237,7 @@ public class Paint extends JFrame {
 		        primerPunto = null;
             }
         });
-		btnTriangle.setBounds(25, 113, 121, 23);
+		btnTriangle.setBounds(3, 113, 121, 23);
 		panel.add(btnTriangle);
 		
 		JLabel lblNewLabel = new JLabel("Shapes");
@@ -223,7 +247,7 @@ public class Paint extends JFrame {
 		
 		JLabel lblOptions = new JLabel("Options");
 		lblOptions.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblOptions.setBounds(25, 184, 87, 23);
+		lblOptions.setBounds(25, 205, 87, 23);
 		panel.add(lblOptions);
 		
 		JButton btnNewButton_1 = new JButton("Fill Color");
@@ -235,7 +259,7 @@ public class Paint extends JFrame {
 		btnNewButton_1.setForeground(Color.BLACK);
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnNewButton_1.setBackground(Color.WHITE);
-		btnNewButton_1.setBounds(25, 278, 131, 23);
+		btnNewButton_1.setBounds(25, 304, 131, 23);
 		panel.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Brush      ");
@@ -248,7 +272,7 @@ public class Paint extends JFrame {
                 isBrushSelected = true;
             }
         });
-		btnNewButton_2.setBounds(25, 212, 131, 23);
+		btnNewButton_2.setBounds(25, 238, 131, 23);
 		panel.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("Eraser   ");
@@ -264,14 +288,13 @@ public class Paint extends JFrame {
 		        primerPunto = null;
             }
         });
-		btnNewButton_3.setBounds(25, 245, 131, 23);
+		btnNewButton_3.setBounds(25, 271, 131, 23);
 		panel.add(btnNewButton_3);
 		
 		JButton btnLine = new JButton(" Line    ");
 		btnLine.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tool=4;
-				
 				isBrushSelected = false;
 		        segundoClick = false; 
 		        primerPunto = null;
@@ -281,7 +304,7 @@ public class Paint extends JFrame {
 		btnLine.setForeground(Color.BLACK);
 		btnLine.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnLine.setBackground(Color.WHITE);
-		btnLine.setBounds(25, 146, 121, 23);
+		btnLine.setBounds(3, 146, 121, 23);
 		panel.add(btnLine);
 		
 		JButton btnNewButton_4 = new JButton("Clean");
@@ -297,7 +320,7 @@ public class Paint extends JFrame {
                 Panel_1.repaint();
             }
         });
-		btnNewButton_4.setBounds(25, 452, 121, 21);
+		btnNewButton_4.setBounds(25, 474, 121, 21);
 		panel.add(btnNewButton_4);
 		
 		JButton btnNewButton_5 = new JButton("Save");
@@ -307,18 +330,18 @@ public class Paint extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_5.setBounds(25, 484, 121, 21);
+		btnNewButton_5.setBounds(25, 505, 121, 21);
 		panel.add(btnNewButton_5);
 		
 		JLabel lblColors = new JLabel("Colors");
 		lblColors.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblColors.setBounds(25, 356, 87, 23);
+		lblColors.setBounds(25, 382, 87, 23);
 		panel.add(lblColors);
 		
 		JSlider grueso = new JSlider();
 		grueso.setValue(1);
 		grueso.setMaximum(10);
-		grueso.setBounds(25, 336, 131, 20);
+		grueso.setBounds(25, 360, 131, 20);
 		grueso.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -330,7 +353,7 @@ public class Paint extends JFrame {
 		
 		JLabel lblNewLabel_1 = new JLabel("Thickness");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_1.setBounds(59, 311, 65, 21);
+		lblNewLabel_1.setBounds(59, 328, 65, 21);
 		panel.add(lblNewLabel_1);
 		
 		JButton btnNewButton_6 = new JButton();
@@ -340,7 +363,7 @@ public class Paint extends JFrame {
             }
         });
 		btnNewButton_6.setBackground(new Color(255, 255, 255));
-		btnNewButton_6.setBounds(25, 389, 21, 21);
+		btnNewButton_6.setBounds(25, 416, 21, 21);
 		panel.add(btnNewButton_6);
 		
 		JButton btnNewButton_6_1 = new JButton("");
@@ -350,7 +373,7 @@ public class Paint extends JFrame {
             }
         });
 		btnNewButton_6_1.setBackground(new Color(0, 0, 0));
-		btnNewButton_6_1.setBounds(59, 389, 21, 21);
+		btnNewButton_6_1.setBounds(59, 416, 21, 21);
 		panel.add(btnNewButton_6_1);
 		
 		JButton btnNewButton_6_2 = new JButton("");
@@ -360,7 +383,7 @@ public class Paint extends JFrame {
             }
         });
 		btnNewButton_6_2.setBackground(new Color(255, 0, 0));
-		btnNewButton_6_2.setBounds(91, 389, 21, 21);
+		btnNewButton_6_2.setBounds(91, 416, 21, 21);
 		panel.add(btnNewButton_6_2);
 		
 		JButton btnNewButton_6_3 = new JButton("");
@@ -371,7 +394,7 @@ public class Paint extends JFrame {
             }
         });
 		btnNewButton_6_3.setBackground(new Color(128, 255, 128));
-		btnNewButton_6_3.setBounds(122, 389, 21, 21);
+		btnNewButton_6_3.setBounds(122, 416, 21, 21);
 		panel.add(btnNewButton_6_3);
 		
 		JButton btnNewButton_6_4 = new JButton("");
@@ -382,7 +405,7 @@ public class Paint extends JFrame {
             }
         });
 		btnNewButton_6_4.setBackground(new Color(128, 255, 255));
-		btnNewButton_6_4.setBounds(25, 421, 21, 21);
+		btnNewButton_6_4.setBounds(25, 448, 21, 21);
 		
 		panel.add(btnNewButton_6_4);
 		
@@ -393,7 +416,7 @@ public class Paint extends JFrame {
             }
         });
 		btnNewButton_6_5.setBackground(new Color(192, 192, 192));
-		btnNewButton_6_5.setBounds(60, 421, 21, 21);
+		btnNewButton_6_5.setBounds(60, 448, 21, 21);
 		panel.add(btnNewButton_6_5);
 		
 		JButton btnNewButton_6_6 = new JButton("");
@@ -403,7 +426,7 @@ public class Paint extends JFrame {
             }
         });
 		btnNewButton_6_6.setBackground(new Color(255, 255, 128));
-		btnNewButton_6_6.setBounds(91, 421, 21, 21);
+		btnNewButton_6_6.setBounds(91, 448, 21, 21);
 		panel.add(btnNewButton_6_6);
 		
 		JButton btnNewButton_6_7 = new JButton("");
@@ -413,8 +436,47 @@ public class Paint extends JFrame {
             }
         });
 		btnNewButton_6_7.setBackground(new Color(255, 128, 255));
-		btnNewButton_6_7.setBounds(122, 421, 21, 21);
+		btnNewButton_6_7.setBounds(122, 448, 21, 21);
 		panel.add(btnNewButton_6_7);
+		
+		JLabel lblNewLabel_3 = new JLabel(String.valueOf(fSize));
+        lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblNewLabel_3.setBounds(171, 118, 45, 13);
+        panel.add(lblNewLabel_3);
+		
+		JButton btnNewButton_7 = new JButton("+");
+		btnNewButton_7.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                fSize += 10;  
+                if (fSize > 200) fSize = 200;
+                lblNewLabel_3.setText(String.valueOf(fSize));
+            }
+        });
+		btnNewButton_7.setBounds(161, 81, 44, 21);
+		panel.add(btnNewButton_7);
+		
+		JButton btnNewButton_7_1 = new JButton("-");
+		btnNewButton_7_1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                fSize -= 10; 
+                if (fSize < 10) fSize = 10; 
+                lblNewLabel_3.setText(String.valueOf(fSize));
+            }
+        });
+		btnNewButton_7_1.setBounds(161, 149, 44, 21);
+		panel.add(btnNewButton_7_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("size");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel_2.setBounds(160, 48, 45, 13);
+		panel.add(lblNewLabel_2);
+		
+		
+		fillRect = new JCheckBox("Fill");
+        fillRect.setBackground(new Color(255, 255, 255));
+        fillRect.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        fillRect.setBounds(19, 178, 93, 21);
+        panel.add(fillRect);
 		
 		Panel_1 = new PaintPanel();
         Panel_1.setBounds(238, 39, 660, 536);
@@ -440,12 +502,15 @@ public class Paint extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
             	
-                if (tool == 1) { 
-                	figuras.add(new figura(e.getX()-40, e.getY()-40, 80, 80, color, 1, gruesoSlider));
-                } else if (tool == 2) { 
-                	figuras.add(new figura(e.getX()-40, e.getY()-40, 80, 80, color, 2, gruesoSlider));
-                }else if (tool==3) {
-                	figuras.add(new figura(e.getX()-40, e.getY()-40, 80, 80, color, 3,gruesoSlider));
+            	if (tool == 1) {
+                    figuras.add(new figura(e.getX() - fSize / 2, e.getY() - fSize / 2,
+                            fSize, fSize, color, 1, gruesoSlider, fillRect.isSelected()));
+                } else if (tool == 2) {
+                    figuras.add(new figura(e.getX() - fSize / 2, e.getY() - fSize / 2,
+                    		fSize, fSize, color, 2, gruesoSlider, fillRect.isSelected()));
+                } else if (tool == 3) {
+                    figuras.add(new figura(e.getX() - fSize / 2, e.getY() - fSize / 2,
+                    		fSize, fSize, color, 3, gruesoSlider, fillRect.isSelected()));
                 }else if (tool == 4) {
                     if (!segundoClick) {
                        
@@ -455,7 +520,7 @@ public class Paint extends JFrame {
                         
                         int dx = e.getX() - primerPunto.x;
                         int dy = e.getY() - primerPunto.y;
-                        figuras.add(new figura(primerPunto.x, primerPunto.y, dx, dy, color, 4,gruesoSlider));
+                        figuras.add(new figura(primerPunto.x, primerPunto.y, dx, dy, color, 4,gruesoSlider, false));
                         segundoClick = false;
                         primerPunto = null;
                         
@@ -478,7 +543,7 @@ public class Paint extends JFrame {
                     puntos.add(new linea(e.getPoint(), color, gruesoSlider));
                     Panel_1.repaint();
                 }else  if(tool==5) {
-                	figuras.add(new figura(e.getX()-40, e.getY()-40, 80, 80, Color.WHITE, 5, 10));
+                	figuras.add(new figura(e.getX()-40, e.getY()-40, 80, 80, Color.WHITE, 5, 10, false));
                 	Panel_1.repaint();
                 }
             }
@@ -488,6 +553,4 @@ public class Paint extends JFrame {
         });
         contentPane.add(Panel_1);
     }
-	
-
 }
