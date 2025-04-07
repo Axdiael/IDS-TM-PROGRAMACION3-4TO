@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JFrame;
@@ -17,6 +19,9 @@ public class keyboard extends JFrame implements KeyListener {
     private PaintPanel paintPanel;
     private int x = 300;  
     private int y = 200;  
+    private final int tamCuadro = 20;
+    private final int AnchoPanel = 586;
+    private final int LargoPanel = 413;
 
     /*
      * Launch the application.
@@ -68,6 +73,15 @@ public class keyboard extends JFrame implements KeyListener {
         btnNewButton.setBounds(0, 413, 586, 50);
         contentPane.add(btnNewButton);
         
+        btnNewButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                x = 300;  
+                y = 200;
+                paintPanel.repaint();
+                keyboard.this.requestFocusInWindow();
+            }
+        });
+        
         addKeyListener(this);
         setFocusable(true);
         requestFocusInWindow();
@@ -82,19 +96,28 @@ public class keyboard extends JFrame implements KeyListener {
     public void keyPressed(KeyEvent e) {
         System.out.println("Tecla: " + e.getKeyCode());
         
+        int newX = x;
+        int newY = y;
+        
         switch(e.getKeyCode()) {
         case KeyEvent.VK_W:    
-            y--;
+        	newY--;
             break;
         case KeyEvent.VK_S:    
-            y++;
+        	newY++;
             break;
         case KeyEvent.VK_A:    
-            x--;
+        	newX--;
             break;
         case KeyEvent.VK_D:    
-            x++;
+            newX++;
             break;
+        }
+        if (newX >= 0 && newX <= AnchoPanel - tamCuadro) {
+            x = newX;
+        }
+        if (newY >= 0 && newY <= LargoPanel - tamCuadro) {
+            y = newY;
         }
         paintPanel.repaint(); 
     }
